@@ -45,7 +45,7 @@ packages:
 extra-deps:
   # - ../shared-kernel/lib/mobility-core
   - git: https://github.com/nammayatri/shared-kernel.git
-    commit: f39edeccc697585e81f9a0a36b441e16341c8c0f
+    commit: f8029833e398e2c7ee24eae330cf2f592d74b54c
     subdirs:
       - lib/mobility-core
   - git: https://github.com/juspay/passetto
