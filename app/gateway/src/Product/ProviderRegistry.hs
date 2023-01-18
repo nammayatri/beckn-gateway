@@ -47,10 +47,8 @@ lookup context = do
     B.LOGISTICS -> listDomainProviders Registry.LOGISTICS
     B.PUBLIC_TRANSPORT -> listDomainProviders Registry.PUBLIC_TRANSPORT
   where
-    listDomainProviders domain = do
-      registryUrl <- asks (.registryUrl)
+    listDomainProviders domain =
       Registry.registryFetch
-        registryUrl
         Registry.emptyLookupRequest{_type = Just Registry.BPP,
                                     domain = Just domain
                                    }
