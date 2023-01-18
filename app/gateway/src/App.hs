@@ -39,7 +39,6 @@ import Network.Wai.Handler.Warp
     setPort,
   )
 import System.Environment (lookupEnv)
-import Tools.SignatureAuth (prepareAuthManagerWithRegistryUrl)
 import Utils.Common
 
 runGateway :: (AppCfg -> AppCfg) -> IO ()
@@ -61,7 +60,7 @@ runGateway configModifier = do
     flowRt' <- runFlowR flowRt appEnv $ do
       withLogTag "Server startup" $ do
         managers <-
-          prepareAuthManagerWithRegistryUrl
+          prepareAuthManager
             flowRt
             appEnv
             ["Proxy-Authorization", "X-Gateway-Authorization"]

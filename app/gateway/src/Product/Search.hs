@@ -39,7 +39,7 @@ search ::
   SignatureAuthResult ->
   ByteString ->
   FlowHandler AckResponse
-search (SignatureAuthResult proxySign _ _) rawReq = withFlowHandlerBecknAPI do
+search (SignatureAuthResult proxySign _) rawReq = withFlowHandlerBecknAPI do
   req :: SearchReq <- rawReq & A.eitherDecodeStrict & fromEitherM (InvalidRequest . T.pack)
   withTransactionIdLogTag req $ do
     let gatewaySearchSignAuth = ET.client ExternalAPI.searchAPI
@@ -63,7 +63,7 @@ searchCb ::
   SignatureAuthResult ->
   ByteString ->
   FlowHandler AckResponse
-searchCb (SignatureAuthResult proxySign _subscriber _) rawReq = withFlowHandlerBecknAPI do
+searchCb (SignatureAuthResult proxySign _subscriber) rawReq = withFlowHandlerBecknAPI do
   req :: OnSearchReq <- rawReq & A.eitherDecodeStrict & fromEitherM (InvalidRequest . T.pack)
   withTransactionIdLogTag req . withLogTag "search_cb" $ do
     -- TODO: source providerUrl from _subscriber
