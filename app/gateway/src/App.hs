@@ -19,7 +19,6 @@ where
 
 import App.Server
 import App.Types
-import qualified Data.Map.Strict as Map
 import qualified Data.HashMap.Strict as HMS
 import qualified Data.Text as T
 import EulerHS.Prelude hiding (exitSuccess)
