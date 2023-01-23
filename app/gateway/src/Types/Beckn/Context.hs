@@ -16,7 +16,7 @@ module Types.Beckn.Context where
 
 import Data.Aeson
 import Data.Text
-import EulerHS.Prelude hiding ((.=))
+import EulerHS.Prelude
 import Servant.Client (BaseUrl)
 import Types.Beckn.Domain
 
