@@ -46,6 +46,7 @@ ghc-options:
   - -fwrite-ide-info
   - -hiedir=.hie
   - -fplugin=RecordDotPreprocessor
+  - -Wwarn=ambiguous-fields
 
 library:
   source-dirs: src
@@ -56,6 +57,7 @@ library:
     - -fhide-source-paths
     - -Wno-unrecognised-pragmas
     - -Werror
+    - -Wwarn=ambiguous-fields
   dependencies:
     - mobility-core
 
