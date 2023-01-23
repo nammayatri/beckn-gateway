@@ -79,6 +79,7 @@ library:
     - servant-client
     - servant-server
     - text
+    - unordered-containers
     - wai
     - warp
     - http-client
