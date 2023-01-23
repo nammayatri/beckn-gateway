@@ -52,7 +52,7 @@ search (SignatureAuthResult proxySign _) rawReq = withFlowHandlerBecknAPI do
         -- TODO maybe we should explicitly call sign request here instead of using callAPIWithTrail'?
         void $
           callBecknAPI'
-            (Just signatureAuthManagerKey)
+            (Just $ ET.ManagerSelector signatureAuthManagerKey)
             Nothing
             providerUrl
             (gatewaySearchSignAuth (Just proxySign) rawReq)
@@ -74,7 +74,7 @@ searchCb (SignatureAuthResult proxySign _subscriber) rawReq = withFlowHandlerBec
       let bapUri = req.context.bap_uri
       void . withShortRetry $
         callBecknAPI'
-          (Just signatureAuthManagerKey)
+          (Just $ ET.ManagerSelector signatureAuthManagerKey)
           Nothing
           bapUri
           (gatewayOnSearchSignAuth (Just proxySign) rawReq)
