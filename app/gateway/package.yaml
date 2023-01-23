@@ -65,6 +65,7 @@ ghc-options:
   - -Wunused-imports
   - -Werror
   - -fplugin=RecordDotPreprocessor
+  - -Wwarn=ambiguous-fields
 
 library:
   source-dirs: src
