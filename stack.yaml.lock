@@ -11,12 +11,12 @@ packages:
     git: https://github.com/nammayatri/shared-kernel.git
     pantry-tree:
       size: 18496
-      sha256: 115ca2ccbb8d9ad4e53fc62927258b6065a8eba543622b21ea53d21c8bcf098e
-    commit: f8029833e398e2c7ee24eae330cf2f592d74b54c
+      sha256: 4cad69c59a698f7bca67347f0c0be6eeed13ba327ce8138488a48a5b58d1377e
+    commit: 1b4f9a80d495b711141fc138e8674bf4e0e05b7f
   original:
     subdir: lib/mobility-core
     git: https://github.com/nammayatri/shared-kernel.git
-    commit: f8029833e398e2c7ee24eae330cf2f592d74b54c
+    commit: 1b4f9a80d495b711141fc138e8674bf4e0e05b7f
 - completed:
     subdir: core
     name: passetto-core
@@ -431,6 +431,13 @@ packages:
       sha256: c882b6ebe8a0616f1ab3908f1620087ad5c6d8d82d1a72b99226f6487419bfe6
   original:
     hackage: some-1.0.1@sha256:26e5bab7276f48b25ea8660d3fd1166c0f20fd497dac879a40f408e23211f93e,2055
+- completed:
+    hackage: haxl-2.3.0.0@sha256:4c9a7371a2c21df910628d582776cf52db72bcd6c808daa02823be0ab06f1eb9,3974
+    pantry-tree:
+      size: 3076
+      sha256: 2da38564de7cda18d12923fef2fd279c7072a7dbd6ee13a4dfea7f347eb50c8c
+  original:
+    hackage: haxl-2.3.0.0@sha256:4c9a7371a2c21df910628d582776cf52db72bcd6c808daa02823be0ab06f1eb9,3974
 - completed:
     hackage: tz-0.1.3.6@sha256:1b0c04d8d7f494888f166c66b72e7fcbc2269e57d1d17d48294ac4e19133a3ef,4631
     pantry-tree:
