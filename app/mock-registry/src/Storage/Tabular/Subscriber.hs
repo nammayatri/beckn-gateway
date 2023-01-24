@@ -60,7 +60,7 @@ instance TEntityKey SubscriberT where
   fromKey (SubscriberTKey keyId subId) = (keyId, subId)
   toKey (keyId, subId) = SubscriberTKey keyId subId
 
-instance TType SubscriberT Domain.Subscriber where
+instance FromTType SubscriberT Domain.Subscriber where
   fromTType SubscriberT {..} = do
     subscriberUrl_ <- parseBaseUrl subscriberUrl
     return $
@@ -75,6 +75,8 @@ instance TType SubscriberT Domain.Subscriber where
           _type = subscriberType,
           ..
         }
+
+instance ToTType SubscriberT Domain.Subscriber where
   toTType Domain.Subscriber {..} = do
     SubscriberT
       { uniqueKeyId = unique_key_id,
