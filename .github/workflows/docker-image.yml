@@ -1,0 +1,31 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: ["main", "sandbox", "production"]
+
+env:
+  DEP_IMAGE: beckn-gateway-dep
+  IMAGE_NAME: beckn-gateway
+  VERSION: $(shell git rev-parse --short HEAD)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: docker login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_HUB_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build the DockerDep image
+        run: docker build -t $DEP_IMAGE:latest -f Dockerfile.dep .
+      - name: DockerDep Push
+        run: docker push gatewayDep
+      - name: Build the Docker image
+        run: docker build -t $(IMAGE_NAME):$(VERSION) -f Dockerfile . --build-arg "DEP_IMAGE_PATH=$(DEP_IMAGE)"
+      - name: Docker Push
+        run: docker push gateway
