@@ -1,6 +1,6 @@
 let common = ./common.dhall
 
-let sec = ./secrets/beckn-gateway.dhall
+let sec = ./secrets/atlas-gateway.dhall
 
 let rcfg =
       { connectHost = "localhost"
@@ -23,7 +23,7 @@ in  { hedisCfg = rcfg
       , signatureExpiry = common.signatureExpiry
       }
     , loggerConfig =
-        common.loggerConfig // { logFilePath = "/tmp/beckn-gateway.log" }
+        common.loggerConfig // { logFilePath = "/tmp/atlas-gateway.log" }
     , graceTerminationPeriod = +90
     , httpClientOptions = common.httpClientOptions
     , shortDurationRetryCfg = common.shortDurationRetryCfg

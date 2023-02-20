@@ -44,4 +44,4 @@ RUN apt-get update && apt-get install -y \
   librdkafka-dev
 
 COPY --from=build /opt/build/bin .
-CMD ["/opt/app/beckn-gateway-exe"]
+CMD ["/opt/app/atlas-gateway-exe"]

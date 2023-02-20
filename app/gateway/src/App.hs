@@ -30,7 +30,7 @@ import Utils.Common
 
 runGateway :: (AppCfg -> AppCfg) -> IO ()
 runGateway configModifier = do
-  appCfg <- configModifier <$> readDhallConfigDefault "beckn-gateway"
+  appCfg <- configModifier <$> readDhallConfigDefault "atlas-gateway"
   let port = appCfg.port
   let metricsPort = appCfg.metricsPort
   Metrics.serve metricsPort

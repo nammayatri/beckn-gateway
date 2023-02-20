@@ -2,7 +2,7 @@
 
 apps () {
 cat << EOF
-beckn-gateway
+atlas-gateway
 mock-registry
 EOF
 }

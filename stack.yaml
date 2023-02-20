@@ -45,7 +45,7 @@ packages:
 extra-deps:
   # - ../beckn-shared-kernel/lib/mobility-core
   - git: git@github.com:Namma-Company/atlas-shared-kernel.git
-    commit: 36074701d4833e8d1b5ae555a05c8fe50d85a061
+    commit: 99cc6ecaee9d2386799de46a186254c62fce451a
     subdirs:
       - lib/mobility-core
   - git: https://github.com/juspay/passetto
