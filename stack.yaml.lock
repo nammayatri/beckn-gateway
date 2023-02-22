@@ -5,16 +5,16 @@
 
 packages:
 - completed:
-    commit: 36074701d4833e8d1b5ae555a05c8fe50d85a061
+    commit: 70fa68ade873b053cb498e7473fa85d4900c8ba5
     git: git@github.com:Namma-Company/atlas-shared-kernel.git
     name: mobility-core
     pantry-tree:
-      sha256: faef3406e81cd368a2e96684ca7f4a69383fac45c3f7c7d6528afc265cb6d4fa
-      size: 15883
+      sha256: 6979629f6032989729fe05042fc35a57814708bd748db3b30bab0ced30b9b8a8
+      size: 16247
     subdir: lib/mobility-core
     version: 0.1.0.0
   original:
-    commit: 36074701d4833e8d1b5ae555a05c8fe50d85a061
+    commit: 70fa68ade873b053cb498e7473fa85d4900c8ba5
     git: git@github.com:Namma-Company/atlas-shared-kernel.git
     subdir: lib/mobility-core
 - completed:

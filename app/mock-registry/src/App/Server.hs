@@ -1,3 +1,13 @@
+ {-
+ This is the default license template.
+ 
+ File: Server.hs
+ Author: utkarshpandey
+ Copyright (c) 2023 utkarshpandey
+ 
+ To edit this license information: Press Ctrl+Shift+P and press 'Create new License Template...'.
+-}
+
 module App.Server where
 
 import App.Routes (registryAPI, registryFlow)

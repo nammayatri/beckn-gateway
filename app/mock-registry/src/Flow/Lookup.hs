@@ -1,3 +1,13 @@
+ {-
+ This is the default license template.
+ 
+ File: Lookup.hs
+ Author: utkarshpandey
+ Copyright (c) 2023 utkarshpandey
+ 
+ To edit this license information: Press Ctrl+Shift+P and press 'Create new License Template...'.
+-}
+
 module Flow.Lookup where
 
 import App.Types (FlowHandler)
