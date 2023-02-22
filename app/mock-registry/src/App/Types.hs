@@ -1,12 +1,13 @@
  {-
- This is the default license template.
+ Copyright 2022-23, Juspay India Pvt Ltd
  
- File: Types.hs
- Author: utkarshpandey
- Copyright (c) 2023 utkarshpandey
+ This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  
- To edit this license information: Press Ctrl+Shift+P and press 'Create new License Template...'.
+ This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+ 
+ You should have received a copy of the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 -}
+
 
 module App.Types
   ( Env,
