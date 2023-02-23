@@ -1,4 +1,4 @@
-ARG DEP_IMAGE_PATH=beckn-gateway
+ARG DEP_IMAGE_PATH=beckn-gateway-dep
 ARG DEP_LABEL=latest
 
 FROM ${DEP_IMAGE_PATH}:${DEP_LABEL} as build
