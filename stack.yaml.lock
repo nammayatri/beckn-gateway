@@ -8,15 +8,15 @@ packages:
     subdir: lib/mobility-core
     name: mobility-core
     version: 0.1.0.0
-    git: git@github.com:nammayatri/shared-kernel.git
+    git: https://github.com/nammayatri/shared-kernel.git
     pantry-tree:
       size: 16451
-      sha256: 1baf709207616668d9bd2303f7490b517ffe6787973169aaf4dbc4b42204a4e5
-    commit: 976c1459ff29165e981502d0ab7c9a3ce6877ede
+      sha256: 513889e102b30b2da7f2d4dbbd52e7f4176777278e6345491d96892417ff2919
+    commit: 296681fc0018daa19ce0f99d85bd87b6a61afc39
   original:
     subdir: lib/mobility-core
-    git: git@github.com:nammayatri/shared-kernel.git
-    commit: 976c1459ff29165e981502d0ab7c9a3ce6877ede
+    git: https://github.com/nammayatri/shared-kernel.git
+    commit: 296681fc0018daa19ce0f99d85bd87b6a61afc39
 - completed:
     subdir: core
     name: passetto-core
