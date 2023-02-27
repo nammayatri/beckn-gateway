@@ -21,7 +21,6 @@
 
 module Storage.Tabular.Subscriber where
 
-import qualified Domain.Subscriber as Domain
 import Kernel.Prelude
 import Kernel.Storage.Esqueleto
 import Kernel.Types.Base64
