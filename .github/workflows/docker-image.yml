@@ -22,11 +22,15 @@ jobs:
           DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: set up env var
+        run: echo "VERSION=$(git rev-parse --short "$GITHUB_SHA")"
+      - name: use env var
+        run: echo ${{ env.VERSION }}
       # - name: Build the DockerDep image
       #   run: docker build -t $DOCKER_USER/$DEP_IMAGE:$DEP_LABEL -f Dockerfile.dep .
       # - name: DockerDep Push
       #   run: docker push $DOCKER_USER/$DEP_IMAGE:$DEP_LABEL
       - name: Build the Docker image
-        run: docker build -t $DOCKER_USER/$IMAGE_NAME:${{GITHUB_SHA}} -f Dockerfile --build-arg "DEP_LABEL=$DEP_LABEL" --build-arg "DEP_IMAGE_PATH=$DOCKER_USER/$DEP_IMAGE" .
+        run: docker build -t $DOCKER_USER/$IMAGE_NAME:${{env.VERSION}} -f Dockerfile --build-arg "DEP_LABEL=$DEP_LABEL" --build-arg "DEP_IMAGE_PATH=$DOCKER_USER/$DEP_IMAGE" .
       - name: Docker Push
-        run: docker push $DOCKER_USER/$IMAGE_NAME:${{GITHUB_SHA}}
+        run: docker push $DOCKER_USER/$IMAGE_NAME:${{env.VERSION}}
