@@ -8,7 +8,7 @@ env:
   DEP_IMAGE: beckn-gateway-dep
   IMAGE_NAME: beckn-gateway
   DOCKER_USER: ${{secrets.DOCKER_HUB_USER}}
-  VERSION: ${{git rev-parse --short ${{github.sha}} }}
+  # VERSION: ${{git rev-parse --short ${{github.sha}} }}
   DEP_LABEL: ${{github.ref_name}}
 
 jobs:
@@ -27,6 +27,6 @@ jobs:
       # - name: DockerDep Push
       #   run: docker push $DOCKER_USER/$DEP_IMAGE:$DEP_LABEL
       - name: Build the Docker image
-        run: docker build -t $DOCKER_USER/$IMAGE_NAME:$VERSION -f Dockerfile --build-arg "DEP_LABEL=$DEP_LABEL" --build-arg "DEP_IMAGE_PATH=$DOCKER_USER/$DEP_IMAGE" .
+        run: docker build -t $DOCKER_USER/$IMAGE_NAME:${{GITHUB_SHA}} -f Dockerfile --build-arg "DEP_LABEL=$DEP_LABEL" --build-arg "DEP_IMAGE_PATH=$DOCKER_USER/$DEP_IMAGE" .
       - name: Docker Push
-        run: docker push $DOCKER_USER/$IMAGE_NAME:$VERSION
+        run: docker push $DOCKER_USER/$IMAGE_NAME:${{GITHUB_SHA}}
