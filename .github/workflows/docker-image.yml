@@ -9,7 +9,7 @@ env:
   IMAGE_NAME: beckn-gateway
   DOCKER_USER: ${{secrets.DOCKER_HUB_USER}}
   VERSION: $(git rev-parse --short "$GITHUB_SHA")
-  DEP_LABEL: ${{GITHUB_REF_NAME}}
+  DEP_LABEL: ${{github.ref_name}}
 
 jobs:
   build:
