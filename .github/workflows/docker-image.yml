@@ -7,9 +7,10 @@ on:
 env:
   DEP_IMAGE: beckn-gateway-dep
   IMAGE_NAME: beckn-gateway
-  DOCKER_USER: ${{secrets.DOCKER_HUB_USER}}
-  # VERSION: ${{git rev-parse --short ${{github.sha}} }}
+  DOCKER_USER: ${{secrets.CONTAINER_PUSH_USERNAME}}
   DEP_LABEL: ${{github.ref_name}}
+  REGISTRY: ghcr.io
+  REPO_NAME: nammayatri
 
 jobs:
   build:
@@ -17,20 +18,72 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: docker login
-        env:
-          DOCKER_PASSWORD: ${{secrets.DOCKER_HUB_PASSWORD}}
-        run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-      - name: set up env var
-        run: echo "VERSION=$(git rev-parse --short "$GITHUB_SHA")"
-      - name: use env var
-        run: echo ${{ env.VERSION }}
-      # - name: Build the DockerDep image
-      #   run: docker build -t $DOCKER_USER/$DEP_IMAGE:$DEP_LABEL -f Dockerfile.dep .
-      # - name: DockerDep Push
-      #   run: docker push $DOCKER_USER/$DEP_IMAGE:$DEP_LABEL
+      # - name: docker login
+      #   env:
+      #     DOCKER_PASSWORD: ${{secrets.CONTAINER_PUSH_SECRET}}
+      #   run: |
+      #     docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: set up env var version
+        if: ${{ github.event.paths == 'push' }} &&
+        run: echo "VERSION=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_ENV
+      - name: Adding Path filters
+        uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            dockerFilePath:
+              - 'Dockerfile*'
+            stackPath:
+              - 'stack.yaml'
+            stackLockPath:
+              - 'stack.yaml.lock'
+            packagePath:
+              - '**/package.yaml'
+      
+      - name: Build And Push the DockerDep image
+        if: steps.filter.outputs.dockerFilePath == 'true' || steps.filter.outputs.stackPath == 'true' || steps.filter.outputs.stackLockPath == 'true' || steps.filter.outputs.stackPath == 'true' 
+        run: docker build -t $REGISTRY/$REPO_NAME/$DEP_IMAGE:$DEP_LABEL -f Dockerfile.dep .
+          # docker push $REGISTRY/$REPO_NAME/$DEP_IMAGE:$DEP_LABEL
+      - name: DockerDep Image Push
+        if: steps.filter.outputs.dockerFilePath == 'true' || steps.filter.outputs.stackPath == 'true' || steps.filter.outputs.stackLockPath == 'true' || steps.filter.outputs.stackPath == 'true' 
+        run: docker push $REGISTRY/$REPO_NAME/$DEP_IMAGE:$DEP_LABEL
       - name: Build the Docker image
-        run: docker build -t $DOCKER_USER/$IMAGE_NAME:${{env.VERSION}} -f Dockerfile --build-arg "DEP_LABEL=$DEP_LABEL" --build-arg "DEP_IMAGE_PATH=$DOCKER_USER/$DEP_IMAGE" .
+        run: docker build -t $REGISTRY/$REPO_NAME/$IMAGE_NAME:$VERSION -f Dockerfile --build-arg "DEP_LABEL=$DEP_LABEL" --build-arg "DEP_IMAGE_PATH=$REGISTRY/$REPO_NAME/$DEP_IMAGE" .
       - name: Docker Push
-        run: docker push $DOCKER_USER/$IMAGE_NAME:${{env.VERSION}}
+        run: docker push $REGISTRY/$REPO_NAME/$IMAGE_NAME:$VERSION
+
+
+
+# build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
+#     - uses: dorny/paths-filter@v2
+#       id: filter
+#       with:
+#         filters: |
+#           path1:
+#             - 'Path1/**'
+#           path2:
+#             - 'Path2/**'
+
+#     # run only if 'path1' files were changed
+#     - name: path1 tests
+#       if: steps.filter.outputs.path1 == 'true'
+#       run: ...
+
+#     # run only if 'path2' files were changed
+#     - name: path2 tests
+#       if: steps.filter.outputs.path2 == 'true'
+#       run: ...
+
+#     # run if 'path1' or 'path2' files were changed
+#     - name: both paths tests
+#       if: steps.filter.outputs.path1 == 'true' || steps.filter.outputs.path2 == 'true'
+#       run: ...
