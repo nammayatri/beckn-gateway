@@ -8,7 +8,7 @@ env:
   DEP_IMAGE: beckn-gateway-dep
   IMAGE_NAME: beckn-gateway
   DOCKER_USER: ${{secrets.DOCKER_HUB_USER}}
-  VERSION: $(git rev-parse --short ${{github.sha}})
+  VERSION: ${{git rev-parse --short ${{github.sha}} }}
   DEP_LABEL: ${{github.ref_name}}
 
 jobs:
