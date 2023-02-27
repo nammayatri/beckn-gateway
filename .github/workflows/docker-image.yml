@@ -2,12 +2,14 @@ name: Docker Image CI
 
 on:
   push:
-    branches: ["main", "sandbox", "production", "name/fixes"]
+    branches: ["main", "sandbox", "production", "nameFixes"]
 
 env:
   DEP_IMAGE: beckn-gateway-dep
   IMAGE_NAME: beckn-gateway
   DOCKER_USER: ${{secrets.DOCKER_HUB_USER}}
+  VERSION: $(git rev-parse --short "$GITHUB_SHA")
+  DEP_LABEL: ${GITHUB_REF#refs/heads/}
 
 jobs:
   build:
@@ -21,10 +23,10 @@ jobs:
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: Build the DockerDep image
-        run: docker build -t $DOCKER_USER/$DEP_IMAGE:latest -f Dockerfile.dep .
+        run: docker build -t $DOCKER_USER/$DEP_IMAGE:$DEP_LABEL -f Dockerfile.dep .
       - name: DockerDep Push
-        run: docker push $DOCKER_USER/$DEP_IMAGE:latest
+        run: docker push $DOCKER_USER/$DEP_IMAGE:$DEP_LABEL
       - name: Build the Docker image
-        run: docker build -t $DOCKER_USER/$IMAGE_NAME:latest -f Dockerfile --build-arg "DEP_LABEL=latest" --build-arg "DEP_IMAGE_PATH=$DOCKER_USER/$DEP_IMAGE" .
+        run: docker build -t $DOCKER_USER/$IMAGE_NAME:$VERSION -f Dockerfile --build-arg "DEP_LABEL=$DEP_LABEL" --build-arg "DEP_IMAGE_PATH=$DOCKER_USER/$DEP_IMAGE" .
       - name: Docker Push
-        run: docker push $DOCKER_USER/$IMAGE_NAME:latest
+        run: docker push $DOCKER_USER/$IMAGE_NAME:$VERSION
