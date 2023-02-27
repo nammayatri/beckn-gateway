@@ -1,19 +1,22 @@
- {-
+{-
  Copyright 2022-23, Juspay India Pvt Ltd
- 
- This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License 
- 
- as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program 
- 
- is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- 
- or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. You should have received a copy of 
- 
+
+ This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License
+
+ as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program
+
+ is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+
+ or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. You should have received a copy of
+
  the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 -}
 
 module App.Types where
 
+import qualified Data.Cache as C
+import qualified Data.Text as T
+import EulerHS.Prelude
 import qualified Kernel.Storage.Hedis as Redis
 import Kernel.Types.App
 import Kernel.Types.Cache
@@ -25,9 +28,6 @@ import Kernel.Utils.IOLogging
 import qualified Kernel.Utils.Registry as Registry
 import Kernel.Utils.Servant.Client (HttpClientOptions, RetryCfg)
 import Kernel.Utils.Servant.SignatureAuth
-import qualified Data.Cache as C
-import qualified Data.Text as T
-import EulerHS.Prelude
 import System.Environment (lookupEnv)
 import Tools.Metrics
 
