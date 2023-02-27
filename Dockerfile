@@ -17,9 +17,9 @@ RUN ormolu_files=`for i in $(git ls-files | grep '\.hs$'); do ormolu -m check -o
 
 ARG BUILD_ARGS
 
-RUN stack build --system-ghc ${BUILD_ARGS}
+RUN stack build --system-ghc
 
-RUN stack test ${BUILD_ARGS} mobility-core
+RUN stack test mobility-core
 
 RUN mv "$(stack path --local-install-root --system-ghc)/bin" /opt/build/bin
 

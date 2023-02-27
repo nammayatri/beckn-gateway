@@ -25,7 +25,6 @@ import qualified Domain.Subscriber as Domain
 import Kernel.Prelude
 import Kernel.Storage.Esqueleto
 import Kernel.Types.Base64
-import qualified Kernel.Types.Registry.Subscriber as Domain
 
 derivePersistField "Domain.Domain"
 
