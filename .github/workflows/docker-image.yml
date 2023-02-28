@@ -7,7 +7,7 @@ on:
 env:
   DEP_IMAGE: beckn-gateway-dep
   IMAGE_NAME: beckn-gateway
-  DOCKER_USER: ${{secrets.CONTAINER_PUSH_USERNAME}}
+  # DOCKER_USER: ${{secrets.CONTAINER_PUSH_USERNAME}}
   DEP_LABEL: ${{github.ref_name}}
   REGISTRY: ghcr.io
   REPO_NAME: nammayatri
@@ -27,10 +27,9 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
       - name: set up env var version
-        if: ${{ github.event.paths == 'push' }} &&
         run: echo "VERSION=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_ENV
       - name: Adding Path filters
         uses: dorny/paths-filter@v2
