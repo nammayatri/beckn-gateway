@@ -2,12 +2,11 @@ name: Docker Image CI
 
 on:
   push:
-    branches: ["main", "sandbox", "production", "nameFixes"]
+    branches: ["main", "sandbox", "production"]
 
 env:
   DEP_IMAGE: beckn-gateway-dep
   IMAGE_NAME: beckn-gateway
-  # DOCKER_USER: ${{secrets.CONTAINER_PUSH_USERNAME}}
   DEP_LABEL: ${{github.ref_name}}
   REGISTRY: ghcr.io
   REPO_NAME: nammayatri
@@ -18,11 +17,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      # - name: docker login
-      #   env:
-      #     DOCKER_PASSWORD: ${{secrets.CONTAINER_PUSH_SECRET}}
-      #   run: |
-      #     docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
@@ -44,45 +38,13 @@ jobs:
               - 'stack.yaml.lock'
             packagePath:
               - '**/package.yaml'
-      
-      - name: Build And Push the DockerDep image
-        if: steps.filter.outputs.dockerFilePath == 'true' || steps.filter.outputs.stackPath == 'true' || steps.filter.outputs.stackLockPath == 'true' || steps.filter.outputs.stackPath == 'true' 
+      - name: Build DockerDep image
+        if: steps.filter.outputs.dockerFilePath == 'true' || steps.filter.outputs.stackPath == 'true' || steps.filter.outputs.stackLockPath == 'true' || steps.filter.outputs.packagePath == 'true' 
         run: docker build -t $REGISTRY/$REPO_NAME/$DEP_IMAGE:$DEP_LABEL -f Dockerfile.dep .
-          # docker push $REGISTRY/$REPO_NAME/$DEP_IMAGE:$DEP_LABEL
       - name: DockerDep Image Push
-        if: steps.filter.outputs.dockerFilePath == 'true' || steps.filter.outputs.stackPath == 'true' || steps.filter.outputs.stackLockPath == 'true' || steps.filter.outputs.stackPath == 'true' 
+        if: steps.filter.outputs.dockerFilePath == 'true' || steps.filter.outputs.stackPath == 'true' || steps.filter.outputs.stackLockPath == 'true' || steps.filter.outputs.packagePath == 'true' 
         run: docker push $REGISTRY/$REPO_NAME/$DEP_IMAGE:$DEP_LABEL
       - name: Build the Docker image
         run: docker build -t $REGISTRY/$REPO_NAME/$IMAGE_NAME:$VERSION -f Dockerfile --build-arg "DEP_LABEL=$DEP_LABEL" --build-arg "DEP_IMAGE_PATH=$REGISTRY/$REPO_NAME/$DEP_IMAGE" .
       - name: Docker Push
         run: docker push $REGISTRY/$REPO_NAME/$IMAGE_NAME:$VERSION
-
-
-
-# build:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v2
-#     - uses: dorny/paths-filter@v2
-#       id: filter
-#       with:
-#         filters: |
-#           path1:
-#             - 'Path1/**'
-#           path2:
-#             - 'Path2/**'
-
-#     # run only if 'path1' files were changed
-#     - name: path1 tests
-#       if: steps.filter.outputs.path1 == 'true'
-#       run: ...
-
-#     # run only if 'path2' files were changed
-#     - name: path2 tests
-#       if: steps.filter.outputs.path2 == 'true'
-#       run: ...
-
-#     # run if 'path1' or 'path2' files were changed
-#     - name: both paths tests
-#       if: steps.filter.outputs.path1 == 'true' || steps.filter.outputs.path2 == 'true'
-#       run: ...
