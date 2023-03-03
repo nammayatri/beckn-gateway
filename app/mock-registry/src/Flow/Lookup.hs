@@ -14,7 +14,7 @@
 
 module Flow.Lookup where
 
-import App.Types (FlowHandler)
+import App.Types (Flow, FlowHandler)
 import Domain.Subscriber
 import Kernel.Prelude
 import Kernel.Storage.Esqueleto
@@ -29,10 +29,10 @@ lookup req = withFlowHandlerAPI $ do
 
 create :: Subscriber -> FlowHandler AckResponse
 create sub = withFlowHandlerAPI $ do
-  runTransaction $ Sub.create sub
+  runTransaction $ Sub.create @Flow sub
   return Ack
 
 delete :: Text -> Text -> FlowHandler AckResponse
 delete uniqueKeyId subscriberId = withFlowHandlerAPI $ do
-  runTransaction $ Sub.deleteByKey (uniqueKeyId, subscriberId)
+  runTransaction $ Sub.deleteByKey @Flow (uniqueKeyId, subscriberId)
   return Ack

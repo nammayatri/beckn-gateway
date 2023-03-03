@@ -11,19 +11,21 @@
 
  the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 -}
+{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TypeApplications #-}
 
 module Storage.Queries.Subscriber where
 
+import App.Types
 import Domain.Subscriber
 import Kernel.Prelude
 import Kernel.Storage.Esqueleto as Esq
 import Kernel.Types.Common
 import Storage.Tabular.Subscriber
 
-findByAll :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Domain -> Maybe SubscriberType -> m [Subscriber]
+findByAll :: forall m. (MonadThrow m, Log m, Transactionable Flow m) => Maybe Text -> Maybe Text -> Maybe Domain -> Maybe SubscriberType -> m [Subscriber]
 findByAll mbKeyId mbSubId mbDomain mbSubType =
-  Esq.findAll $ do
+  Esq.findAll @m @Flow $ do
     parkingLocation <- from $ table @SubscriberT
     where_ $
       whenJust_ mbKeyId (\keyId -> parkingLocation ^. SubscriberUniqueKeyId ==. val keyId)
@@ -32,13 +34,13 @@ findByAll mbKeyId mbSubId mbDomain mbSubType =
         &&. whenJust_ mbSubType (\subType -> parkingLocation ^. SubscriberSubscriberType ==. val subType)
     return parkingLocation
 
-create :: Subscriber -> SqlDB ()
+create :: Subscriber -> SqlDB m ()
 create = Esq.create
 
-deleteByKey :: (Text, Text) -> SqlDB ()
+deleteByKey :: (Text, Text) -> SqlDB m ()
 deleteByKey = Esq.deleteByKey @SubscriberT
 
-findAll :: (MonadThrow m, Log m, Transactionable m) => m [Subscriber]
+findAll :: forall m. (MonadThrow m, Log m, Transactionable Flow m) => m [Subscriber]
 findAll =
-  Esq.findAll $ do
+  Esq.findAll @m @Flow $ do
     from $ table @SubscriberT
