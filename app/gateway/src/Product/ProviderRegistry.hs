@@ -21,6 +21,7 @@ import EulerHS.Prelude
 import Kernel.Types.Common
 import Kernel.Types.Registry as Registry
 import qualified Kernel.Types.Registry.API as Registry
+import qualified Kernel.Types.Registry.City as Registry
 import qualified Kernel.Types.Registry.Domain as Registry
 import qualified Kernel.Utils.Registry as Registry
 import Tools.Metrics
@@ -52,5 +53,6 @@ lookup context = do
       Registry.registryFetch
         registryUrl
         Registry.emptyLookupRequest{_type = Just Registry.BPP,
-                                    domain = Just domain
+                                    domain = Just domain,
+                                    city = Just (Registry.City context.city Nothing)
                                    }

@@ -24,7 +24,8 @@ data Context = Context
   { domain :: Domain,
     bap_uri :: BaseUrl,
     bpp_uri :: Maybe BaseUrl,
-    transaction_id :: Maybe Text
+    transaction_id :: Maybe Text,
+    city :: Maybe Text
   }
   deriving (Generic, FromJSON, Show)
 
