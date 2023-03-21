@@ -21,8 +21,8 @@ import Kernel.Storage.Esqueleto as Esq
 import Kernel.Types.Common
 import Storage.Tabular.Subscriber
 
-findByAll :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Domain -> Maybe SubscriberType -> m [Subscriber]
-findByAll mbKeyId mbSubId mbDomain mbSubType =
+findByAll :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Domain -> Maybe SubscriberType -> Maybe Text -> m [Subscriber]
+findByAll mbKeyId mbSubId mbDomain mbSubType mbCity =
   Esq.findAll $ do
     parkingLocation <- from $ table @SubscriberT
     where_ $
@@ -30,6 +30,7 @@ findByAll mbKeyId mbSubId mbDomain mbSubType =
         &&. whenJust_ mbSubId (\subId -> parkingLocation ^. SubscriberSubscriberId ==. val subId)
         &&. whenJust_ mbDomain (\domain -> parkingLocation ^. SubscriberDomain ==. val domain)
         &&. whenJust_ mbSubType (\subType -> parkingLocation ^. SubscriberSubscriberType ==. val subType)
+        &&. whenJust_ mbCity (\_ -> parkingLocation ^. SubscriberCity ==. val mbCity)
     return parkingLocation
 
 create :: Subscriber -> SqlDB ()
