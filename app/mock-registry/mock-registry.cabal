@@ -48,7 +48,7 @@ library
       RecordWildCards
       OverloadedStrings
       TypeApplications
-  ghc-options: -fwrite-ide-info -hiedir=.hie -fplugin=RecordDotPreprocessor -Wall -Wcompat -Widentities -fhide-source-paths -Wno-unrecognised-pragmas -Werror
+  ghc-options: -fwrite-ide-info -hiedir=.hie -fplugin=RecordDotPreprocessor -Wwarn=ambiguous-fields -Wall -Wcompat -Widentities -fhide-source-paths -Wno-unrecognised-pragmas -Werror -Wwarn=ambiguous-fields
   build-depends:
       base >=4.7 && <5
     , euler-hs
@@ -83,7 +83,7 @@ executable mock-registry-exe
       RecordWildCards
       OverloadedStrings
       TypeApplications
-  ghc-options: -fwrite-ide-info -hiedir=.hie -fplugin=RecordDotPreprocessor -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -fwrite-ide-info -hiedir=.hie -fplugin=RecordDotPreprocessor -Wwarn=ambiguous-fields -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
     , euler-hs
