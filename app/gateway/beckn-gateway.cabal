@@ -72,7 +72,7 @@ library
       BlockArguments
       TypeSynonymInstances
       UndecidableInstances
-  ghc-options: -fwrite-ide-info -hiedir=.hie -Wall -Wcompat -Widentities -Wunused-imports -Werror -fplugin=RecordDotPreprocessor -Wincomplete-uni-patterns
+  ghc-options: -fwrite-ide-info -hiedir=.hie -Wall -Wcompat -Widentities -Wunused-imports -Werror -fplugin=RecordDotPreprocessor -Wwarn=ambiguous-fields -Wincomplete-uni-patterns
   build-depends:
       aeson
     , base >=4.7 && <5
@@ -132,7 +132,7 @@ executable beckn-gateway-exe
       BlockArguments
       TypeSynonymInstances
       UndecidableInstances
-  ghc-options: -fwrite-ide-info -hiedir=.hie -Wall -Wcompat -Widentities -Wunused-imports -Werror -fplugin=RecordDotPreprocessor -threaded -rtsopts "-with-rtsopts=-N -T" -Wincomplete-uni-patterns
+  ghc-options: -fwrite-ide-info -hiedir=.hie -Wall -Wcompat -Widentities -Wunused-imports -Werror -fplugin=RecordDotPreprocessor -Wwarn=ambiguous-fields -threaded -rtsopts "-with-rtsopts=-N -T" -Wincomplete-uni-patterns
   build-depends:
       base >=4.7 && <5
     , beckn-gateway
