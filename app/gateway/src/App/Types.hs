@@ -23,6 +23,7 @@ import Kernel.Types.Cache
 import Kernel.Types.Common hiding (id)
 import Kernel.Types.Flow
 import Kernel.Types.Registry
+import Kernel.Utils.App (lookupDeploymentVersion)
 import Kernel.Utils.Dhall (FromDhall)
 import Kernel.Utils.IOLogging
 import qualified Kernel.Utils.Registry as Registry
@@ -61,7 +62,8 @@ data AppEnv = AppEnv
     cache :: C.Cache Text Text,
     isShuttingDown :: TMVar (),
     coreMetrics :: CoreMetricsContainer,
-    loggerEnv :: LoggerEnv
+    loggerEnv :: LoggerEnv,
+    version :: DeploymentVersion
   }
   deriving (Generic)
 
@@ -76,6 +78,7 @@ data CoreVersions = CoreVersions
 buildAppEnv :: AppCfg -> IO AppEnv
 buildAppEnv AppCfg {..} = do
   hostname <- map T.pack <$> lookupEnv "POD_NAME"
+  version <- lookupDeploymentVersion
   cache <- C.newCache Nothing
   isShuttingDown <- newEmptyTMVarIO
   coreMetrics <- registerCoreMetricsContainer
