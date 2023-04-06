@@ -205,14 +205,10 @@
         "beam-mysql": "beam-mysql",
         "common": "common_3",
         "flake-parts": [
-          "shared-kernel",
-          "euler-hs",
           "common",
           "flake-parts"
         ],
         "haskell-flake": [
-          "shared-kernel",
-          "euler-hs",
           "common",
           "haskell-flake"
         ],
@@ -692,7 +688,6 @@
         "common": "common_2",
         "euler-hs": "euler-hs",
         "flake-parts": [
-          "shared-kernel",
           "common",
           "flake-parts"
         ],
@@ -702,11 +697,11 @@
         "passetto-hs": "passetto-hs"
       },
       "locked": {
-        "lastModified": 1679449610,
-        "narHash": "sha256-UJ3PNc+6tfFFp2gmvQnU4XnyAFTeEUBgxF0xbXRrhSI=",
+        "lastModified": 1681123426,
+        "narHash": "sha256-ZT8Hk/alZA12MC7uSwZvmmYY3URfqiUYTCwl5qPtZ2k=",
         "owner": "nammayatri",
         "repo": "shared-kernel",
-        "rev": "9ed254f2dda638ef556d491cacbeec2a29fd6cae",
+        "rev": "f06badaeaeffc42772d745a5f1a36777ac4db1cd",
         "type": "github"
       },
       "original": {
