@@ -34,3 +34,5 @@ dhall-configs/dev/secrets/top-secret.dhall
 # Nix
 result
 .direnv
+.pre-commit-config.yaml
+
