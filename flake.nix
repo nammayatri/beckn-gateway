@@ -1,17 +1,20 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     common.url = "github:nammayatri/common";
+    nixpkgs.follows = "common/nixpkgs";
     flake-parts.follows = "common/flake-parts";
+    systems.url = "github:nix-systems/default";
 
     shared-kernel.url = "github:nammayatri/shared-kernel";
     shared-kernel.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs@{ nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = nixpkgs.lib.systems.flakeExposed;
+      systems = import inputs.systems;
       imports = [
         inputs.common.flakeModules.default
+        ./nix/arion-configuration.nix
+        ./nix/docker.nix
       ];
 
       perSystem = { self', pkgs, lib, config, ... }: {
@@ -19,10 +22,26 @@
           imports = [
             inputs.shared-kernel.haskellFlakeProjectModules.output
           ];
+          devShell.tools = _: {
+            inherit (self'.packages) arion;
+          };
+          autoWire = [ "packages" "checks" "apps" ];
         };
 
-        packages.default = pkgs.linkFarmFromDrvs "packages-combined"
-          (builtins.attrValues config.haskellProjects.default.outputs.localPackages);
+        process-compose.configs.run.processes = {
+          beckn-gateway.command = lib.getExe self'.packages.beckn-gateway;
+          mock-registry.command = lib.getExe self'.packages.mock-registry;
+        };
+
+        packages.default = self'.packages.beckn-gateway;
+
+        devShells.default = pkgs.mkShell {
+          # cf. https://haskell.flake.page/devshell#composing-devshells
+          inputsFrom = [
+            config.haskellProjects.default.outputs.devShell
+            config.pre-commit.devShell
+          ];
+        };
       };
     };
 }

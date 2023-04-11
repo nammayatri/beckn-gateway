@@ -3,26 +3,26 @@ pipeline {
     stages {
         stage ('Cachix setup') {
             steps {
-                sh 'nix run nixpkgs#cachix use nammayatri'
+                cachixUse "nammayatri"
             }
         }
-        stage ('Nix Build') {
+        stage ('Nix Build All') {
             steps {
-                sh 'nix build -L'
+                nixBuildAll ()
             }
         }
-        stage ('Flake check') {
+        stage ('Docker image') {
+            when {
+                branch 'main'
+            }
             steps {
-                sh 'nix build -L .#check'
+                dockerPush "dockerImage", "ghcr.io"
             }
         }
-        /* stage ('Push to cachix') {
-          environment {
-            CACHIX_AUTH_TOKEN = credentials('cachix-auth-token')
-          }
-          steps {
-            sh 'nix run .#cachix-push'
-          }
-        } */
+        stage ('Cachix push') {
+            steps {
+                cachixPush "nammayatri"
+            }
+        }
     }
 }

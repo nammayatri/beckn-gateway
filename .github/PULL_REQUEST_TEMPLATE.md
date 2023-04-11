@@ -15,7 +15,7 @@
 
 - [ ] This PR modifies the database schema (database migration added)
 - [ ] This PR modifies dhall configs/environment variables
-<!-- 
+<!--
 Provide links to the files with corresponding changes.
 
 You can find config files in `dhall-configs`
