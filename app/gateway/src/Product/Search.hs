@@ -57,6 +57,7 @@ search (SignatureAuthResult proxySign _) rawReq = withFlowHandlerBecknAPI do
             providerUrl
             (gatewaySearchSignAuth (Just proxySign) rawReq)
             "search"
+            ExternalAPI.searchAPI
     return Ack
 
 searchCb ::
@@ -78,4 +79,5 @@ searchCb (SignatureAuthResult proxySign _subscriber) rawReq = withFlowHandlerBec
           bapUri
           (gatewayOnSearchSignAuth (Just proxySign) rawReq)
           "on_search"
+          ExternalAPI.onSearchAPI
       return Ack
