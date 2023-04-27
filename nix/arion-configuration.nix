@@ -40,7 +40,6 @@ _:
           "pgadmin-data:/var/lib/pgadmin"
           "${../dev/pgadmin/servers.json}:/pgadmin4/servers.json"
         ];
-        profiles = [ "pgadmin" ];
       };
     };
   };
