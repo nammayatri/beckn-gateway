@@ -20,6 +20,9 @@ pipeline {
             }
         }
         stage ('Cachix push') {
+            when {
+                anyOf { branch 'main'; branch 'prodHotPush' }
+            }
             steps {
                 cachixPush "nammayatri"
             }
