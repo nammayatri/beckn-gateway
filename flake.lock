@@ -335,11 +335,11 @@
         "sequelize": "sequelize"
       },
       "locked": {
-        "lastModified": 1682697194,
-        "narHash": "sha256-yUlBIgOrdQG30sg0yh9godjE9hYnVxUo29kvcmmsWmI=",
+        "lastModified": 1683039256,
+        "narHash": "sha256-pOUSWqiG0lgcSDnFZs6r0KpU9R0ohTrnocSsFq22SGk=",
         "owner": "juspay",
         "repo": "euler-hs",
-        "rev": "b7eb8a74b6fd784f37b28b79466071f5716e172f",
+        "rev": "168dc51f8a68e4bf52de6c691343afa594f933a9",
         "type": "github"
       },
       "original": {
@@ -715,17 +715,17 @@
     "hedis": {
       "flake": false,
       "locked": {
-        "lastModified": 1598534673,
-        "narHash": "sha256-JZUSxloS/Fk2gNk3bMMBq0rjkebPols0IUxWp4gJFPc=",
+        "lastModified": 1681138785,
+        "narHash": "sha256-e3JLqLMtIYUoRMbt4E9SHfIok1WkrQqzn11OOi8JfUM=",
         "owner": "juspay",
         "repo": "hedis",
-        "rev": "46ea0ea78e6d8d1a2b1a66e6f08078a37864ad80",
+        "rev": "22d814672d8476a6f8fb43047af2897afbf77ac6",
         "type": "github"
       },
       "original": {
         "owner": "juspay",
         "repo": "hedis",
-        "rev": "46ea0ea78e6d8d1a2b1a66e6f08078a37864ad80",
+        "rev": "22d814672d8476a6f8fb43047af2897afbf77ac6",
         "type": "github"
       }
     },
@@ -1543,11 +1543,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1683208403,
-        "narHash": "sha256-sTa5xuwxbHN70As5/HTrtpY/ldqEpws5xgheTu14MqY=",
+        "lastModified": 1683215542,
+        "narHash": "sha256-DPVGr4UqmJZB6vEbrzIpAGHNc5cVWvI+JcJqzPzjR/A=",
         "owner": "nammayatri",
         "repo": "shared-kernel",
-        "rev": "e893648b1ee47ea1060dd36cb73dc0e2cfb5dae7",
+        "rev": "2c4c6799717d331e24f618f6b8304397ec18a551",
         "type": "github"
       },
       "original": {
