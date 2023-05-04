@@ -34,6 +34,8 @@ import Tools.Metrics
 
 data AppCfg = AppCfg
   { hedisCfg :: Redis.HedisCfg,
+    hedisClusterCfg :: Redis.HedisCfg,
+    hedisMigrationStage :: Bool,
     port :: Int,
     metricsPort :: Int,
     selfId :: Text,
@@ -51,6 +53,8 @@ data AppCfg = AppCfg
 
 data AppEnv = AppEnv
   { hedisEnv :: Redis.HedisEnv,
+    hedisClusterEnv :: Redis.HedisEnv,
+    hedisMigrationStage :: Bool,
     hostName :: Text,
     authEntity :: AuthenticatingEntity',
     httpClientOptions :: HttpClientOptions,
@@ -85,6 +89,7 @@ buildAppEnv AppCfg {..} = do
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
   let modifierFunc = ("gateway:" <>)
   hedisEnv <- Redis.connectHedis hedisCfg modifierFunc
+  hedisClusterEnv <- Redis.connectHedisCluster hedisClusterCfg modifierFunc
   return $
     AppEnv
       { gwId = selfId,
@@ -95,6 +100,7 @@ releaseAppEnv :: AppEnv -> IO ()
 releaseAppEnv AppEnv {..} = do
   releaseLoggerEnv loggerEnv
   Redis.disconnectHedis hedisEnv
+  Redis.disconnectHedis hedisClusterEnv
 
 type FlowHandler = FlowHandlerR AppEnv
 
