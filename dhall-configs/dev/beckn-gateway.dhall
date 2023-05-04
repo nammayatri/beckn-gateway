@@ -13,6 +13,7 @@ let rcfg =
       }
 
 in  { hedisCfg = rcfg
+    , hedisClusterCfg = rcfg
     , port = +8015
     , metricsPort = +9998
     , selfId = "JUSPAY.BG.1"
