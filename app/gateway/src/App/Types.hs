@@ -36,6 +36,7 @@ data AppCfg = AppCfg
   { hedisCfg :: Redis.HedisCfg,
     hedisClusterCfg :: Redis.HedisCfg,
     hedisMigrationStage :: Bool,
+    cutOffHedisCluster :: Bool,
     port :: Int,
     metricsPort :: Int,
     selfId :: Text,
@@ -55,6 +56,7 @@ data AppEnv = AppEnv
   { hedisEnv :: Redis.HedisEnv,
     hedisClusterEnv :: Redis.HedisEnv,
     hedisMigrationStage :: Bool,
+    cutOffHedisCluster :: Bool,
     hostName :: Text,
     authEntity :: AuthenticatingEntity',
     httpClientOptions :: HttpClientOptions,
@@ -89,7 +91,10 @@ buildAppEnv AppCfg {..} = do
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
   let modifierFunc = ("gateway:" <>)
   hedisEnv <- Redis.connectHedis hedisCfg modifierFunc
-  hedisClusterEnv <- Redis.connectHedisCluster hedisClusterCfg modifierFunc
+  hedisClusterEnv <-
+    if cutOffHedisCluster
+      then pure hedisEnv
+      else Redis.connectHedisCluster hedisClusterCfg modifierFunc
   return $
     AppEnv
       { gwId = selfId,

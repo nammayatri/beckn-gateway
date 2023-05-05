@@ -14,6 +14,8 @@ let rcfg =
 
 in  { hedisCfg = rcfg
     , hedisClusterCfg = rcfg
+    , hedisMigrationStage = True
+    , cutOffHedisCluster = False
     , port = +8015
     , metricsPort = +9998
     , selfId = "JUSPAY.BG.1"
