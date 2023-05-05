@@ -28,7 +28,7 @@ pipeline {
                     stage ('Docker image') {
                         when {
                             allOf {
-                                branch 'main'; equals expected: 'x86_64-linux', actual: "${env.SYSTEM}"
+                                branch 'main'; expression { 'x86_64-linux' == env.SYSTEM }
                             }
                         }
                         steps {
