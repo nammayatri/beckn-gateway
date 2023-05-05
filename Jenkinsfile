@@ -22,7 +22,7 @@ pipeline {
                     }
                     stage ('Nix Build All') {
                         steps {
-                            nixBuildAll ()
+                            nixBuildAll system: env.SYSTEM
                         }
                     }
                     stage ('Docker image') {
