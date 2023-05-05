@@ -15,7 +15,7 @@
 module Types.Beckn.API.Callback where
 
 import Data.Aeson
-import EulerHS.Prelude hiding ((.=))
+import EulerHS.Prelude
 import Kernel.Types.Beckn.Error
 import Types.Beckn.Context
 

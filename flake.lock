@@ -20,17 +20,17 @@
     "beam-mysql": {
       "flake": false,
       "locked": {
-        "lastModified": 1604096494,
-        "narHash": "sha256-+mCbshr1YSJzLrEb+JpSQaH5EODAZ0Sm8sstztKAZq0=",
+        "lastModified": 1675165348,
+        "narHash": "sha256-sFOtfvAeFwIaMpMK8vD5usE71/jTHwDCdbf++h4jOqQ=",
         "owner": "juspay",
         "repo": "beam-mysql",
-        "rev": "4c876ea2eae60bf3402d6f5c1ecb60a386fe3ace",
+        "rev": "b4dbc91276f6a8b5356633492f89bdac34ccd9a1",
         "type": "github"
       },
       "original": {
         "owner": "juspay",
         "repo": "beam-mysql",
-        "rev": "4c876ea2eae60bf3402d6f5c1ecb60a386fe3ace",
+        "rev": "b4dbc91276f6a8b5356633492f89bdac34ccd9a1",
         "type": "github"
       }
     },
@@ -160,6 +160,45 @@
         "type": "github"
       }
     },
+    "cachix_3": {
+      "inputs": {
+        "devenv": "devenv_3",
+        "flake-compat": "flake-compat_5",
+        "hnix-store-core": "hnix-store-core_3",
+        "nixpkgs": "nixpkgs_12"
+      },
+      "locked": {
+        "lastModified": 1679144949,
+        "narHash": "sha256-xhLCsAkz5c+XIqQ4eGY9bSp3zBgCDCaHXZ2HLk8vqmE=",
+        "owner": "cachix",
+        "repo": "cachix",
+        "rev": "c8f0d787939c93cc686c2604f7d024e631e4a00d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "ref": "v1.3.3",
+        "repo": "cachix",
+        "type": "github"
+      }
+    },
+    "cereal": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1668616659,
+        "narHash": "sha256-FkwxTJzY4A2CaGnQ+YBdEKZr+apEBK8Awcxrfp4uIvE=",
+        "owner": "juspay",
+        "repo": "cereal",
+        "rev": "213f145ccbd99e630ee832d2f5b22894c810d3cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "juspay",
+        "repo": "cereal",
+        "rev": "213f145ccbd99e630ee832d2f5b22894c810d3cc",
+        "type": "github"
+      }
+    },
     "clickhouse-haskell": {
       "inputs": {
         "common": [
@@ -262,6 +301,7 @@
         "nixpkgs-21_11": "nixpkgs-21_11_3",
         "pre-commit-hooks-nix": "pre-commit-hooks-nix_3",
         "process-compose-flake": "process-compose-flake_3",
+<<<<<<< HEAD
         "systems": "systems_3",
         "treefmt-nix": "treefmt-nix_3"
       },
@@ -271,6 +311,16 @@
         "owner": "nammayatri",
         "repo": "common",
         "rev": "9b0393630068e688795bedd46c49df1a0bbc7c0a",
+=======
+        "treefmt-nix": "treefmt-nix_3"
+      },
+      "locked": {
+        "lastModified": 1683069140,
+        "narHash": "sha256-bVSYNqob6SH3bn3CUQCDAEqpIARywlJoImpAkNTfdxA=",
+        "owner": "nammayatri",
+        "repo": "common",
+        "rev": "3ba4249bbd4bc81233502f504f5b8e0924d79911",
+>>>>>>> 7ce13af (resolved errors)
         "type": "github"
       },
       "original": {
@@ -333,6 +383,9 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7ce13af (resolved errors)
     "devenv_3": {
       "inputs": {
         "flake-compat": [
@@ -361,8 +414,11 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
 =======
 >>>>>>> 457d059 (added redis-cluster)
+=======
+>>>>>>> 7ce13af (resolved errors)
     "devour-flake": {
       "flake": false,
       "locked": {
@@ -396,6 +452,9 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7ce13af (resolved errors)
     "devour-flake_3": {
       "flake": false,
       "locked": {
@@ -412,13 +471,78 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
 =======
 >>>>>>> 457d059 (added redis-cluster)
+=======
+    "euler-build": {
+      "inputs": {
+        "flake-utils": "flake-utils_7",
+        "nix-inclusive": "nix-inclusive",
+        "nixpkgs": "nixpkgs_16"
+      },
+      "locked": {
+        "lastModified": 1620054696,
+        "narHash": "sha256-316JgoGBQs+29untwjJokSWc0OW2PoCCL33aC/hvPKw=",
+        "ref": "master",
+        "rev": "c6af205a7adb1b7abac18f06830f4ed196bfd6e4",
+        "revCount": 41,
+        "type": "git",
+        "url": "ssh://git@bitbucket.org/juspay/euler-build"
+      },
+      "original": {
+        "id": "euler-build",
+        "type": "indirect"
+      }
+    },
+    "euler-build_2": {
+      "inputs": {
+        "flake-utils": "flake-utils_8",
+        "nix-inclusive": "nix-inclusive_2",
+        "nixpkgs": "nixpkgs_17"
+      },
+      "locked": {
+        "lastModified": 1620054696,
+        "narHash": "sha256-316JgoGBQs+29untwjJokSWc0OW2PoCCL33aC/hvPKw=",
+        "ref": "master",
+        "rev": "c6af205a7adb1b7abac18f06830f4ed196bfd6e4",
+        "revCount": 41,
+        "type": "git",
+        "url": "ssh://git@bitbucket.org/juspay/euler-build"
+      },
+      "original": {
+        "id": "euler-build",
+        "type": "indirect"
+      }
+    },
+    "euler-events-hs": {
+      "inputs": {
+        "euler-build": "euler-build"
+      },
+      "locked": {
+        "lastModified": 1650883593,
+        "narHash": "sha256-eZ79EYGtWwSolxTO5A9jzF0ze59db8mpSU8cF02ZqFs=",
+        "ref": "master",
+        "rev": "661920e09652ef1c27e8eb10d2f52c3dc82859c9",
+        "revCount": 174,
+        "type": "git",
+        "url": "ssh://git@ssh.bitbucket.juspay.net/fram/euler-events-hs"
+      },
+      "original": {
+        "ref": "master",
+        "rev": "661920e09652ef1c27e8eb10d2f52c3dc82859c9",
+        "type": "git",
+        "url": "ssh://git@ssh.bitbucket.juspay.net/fram/euler-events-hs"
+      }
+    },
+>>>>>>> 7ce13af (resolved errors)
     "euler-hs": {
       "inputs": {
         "beam": "beam",
         "beam-mysql": "beam-mysql",
+        "cereal": "cereal",
         "common": "common_3",
+        "euler-events-hs": "euler-events-hs",
         "flake-parts": [
           "shared-kernel",
           "euler-hs",
@@ -432,7 +556,9 @@
           "haskell-flake"
         ],
         "hedis": "hedis",
+        "juspay-extra": "juspay-extra",
         "mysql-haskell": "mysql-haskell",
+<<<<<<< HEAD
 <<<<<<< HEAD
         "nixpkgs": [
           "shared-kernel",
@@ -455,22 +581,32 @@
         "ref": "haskell-flake-0.4",
 =======
         "nixpkgs": "nixpkgs_12",
+=======
+        "nixpkgs": "nixpkgs_18",
+>>>>>>> 7ce13af (resolved errors)
         "sequelize": "sequelize"
       },
       "locked": {
-        "lastModified": 1682723354,
-        "narHash": "sha256-ZciMGeYi9RTmXKBUdMrYQbRvGJge8NVNKFhbdStZj50=",
-        "owner": "piyushKumar-1",
-        "repo": "euler-hs",
-        "rev": "464ab99327e44bd5eee78a9986f2f9abc5f160de",
-        "type": "github"
+        "lastModified": 1683196408,
+        "narHash": "sha256-glurxv6p3+CJGbc8yzhRKOWnPlFP5ggFxSO+cR2HZg4=",
+        "ref": "ny-compatible",
+        "rev": "584929c38de58509e985474b700da7fbc9c3b6a4",
+        "revCount": 2115,
+        "type": "git",
+        "url": "ssh://git@ssh.bitbucket.juspay.net/iris/euler-hs"
       },
       "original": {
+<<<<<<< HEAD
         "owner": "piyushKumar-1",
 >>>>>>> 457d059 (added redis-cluster)
         "repo": "euler-hs",
         "rev": "464ab99327e44bd5eee78a9986f2f9abc5f160de",
         "type": "github"
+=======
+        "ref": "ny-compatible",
+        "type": "git",
+        "url": "ssh://git@ssh.bitbucket.juspay.net/iris/euler-hs"
+>>>>>>> 7ce13af (resolved errors)
       }
     },
     "flake-compat": {
@@ -538,6 +674,9 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7ce13af (resolved errors)
     "flake-compat_5": {
       "flake": false,
       "locked": {
@@ -570,8 +709,11 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
 =======
 >>>>>>> 457d059 (added redis-cluster)
+=======
+>>>>>>> 7ce13af (resolved errors)
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -750,6 +892,9 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7ce13af (resolved errors)
     "flake-utils_5": {
       "locked": {
         "lastModified": 1667395993,
@@ -780,8 +925,41 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
 =======
 >>>>>>> 457d059 (added redis-cluster)
+=======
+    "flake-utils_7": {
+      "locked": {
+        "lastModified": 1600209923,
+        "narHash": "sha256-zoOWauTliFEjI++esk6Jzk7QO5EKpddWXQm9yQK24iM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3cd06d3c1df6879c9e41cb2c33113df10566c760",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_8": {
+      "locked": {
+        "lastModified": 1600209923,
+        "narHash": "sha256-zoOWauTliFEjI++esk6Jzk7QO5EKpddWXQm9yQK24iM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3cd06d3c1df6879c9e41cb2c33113df10566c760",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+>>>>>>> 7ce13af (resolved errors)
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -879,6 +1057,9 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7ce13af (resolved errors)
     "gitignore_5": {
       "inputs": {
         "nixpkgs": [
@@ -930,8 +1111,11 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
 =======
 >>>>>>> 457d059 (added redis-cluster)
+=======
+>>>>>>> 7ce13af (resolved errors)
     "haskell-flake": {
       "locked": {
         "lastModified": 1685469326,
@@ -972,11 +1156,19 @@
     },
     "haskell-flake_3": {
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1685469326,
         "narHash": "sha256-esxJLsGexI/J6Fc32tJd2p3K5IOBZSCHgFvegjIpc+0=",
         "owner": "srid",
         "repo": "haskell-flake",
         "rev": "996f5c2cdc67285c4990df378976f9dbf26f8401",
+=======
+        "lastModified": 1682614676,
+        "narHash": "sha256-Eu53z8fdtt8mfMRp+IskjclCT9LqvCViMOzvqO0Rz50=",
+        "owner": "srid",
+        "repo": "haskell-flake",
+        "rev": "11ab35533afaf0cacc5f3ed8032cb2482cedf8fd",
+>>>>>>> 7ce13af (resolved errors)
         "type": "github"
       },
       "original": {
@@ -988,6 +1180,7 @@
     "hedis": {
       "flake": false,
       "locked": {
+<<<<<<< HEAD
 <<<<<<< HEAD
         "lastModified": 1685620412,
         "narHash": "sha256-cPRZRbR76M7fBNSXcrSOqLlIcs2KSj/Ynf0AdZ46qrE=",
@@ -1002,12 +1195,21 @@
         "rev": "22d814672d8476a6f8fb43047af2897afbf77ac6",
 >>>>>>> 457d059 (added redis-cluster)
         "type": "github"
+=======
+        "lastModified": 1672223380,
+        "narHash": "sha256-Jbc0YgzMjFRHDNvciTzVrj6s1kxd6ErlxcHxKkQu+2U=",
+        "ref": "cluster",
+        "rev": "f8b11e0512b864f165a4a086713b41a0e3d622ea",
+        "revCount": 571,
+        "type": "git",
+        "url": "https://github.com/juspay/hedis"
+>>>>>>> 7ce13af (resolved errors)
       },
       "original": {
-        "owner": "juspay",
-        "repo": "hedis",
-        "rev": "22d814672d8476a6f8fb43047af2897afbf77ac6",
-        "type": "github"
+        "ref": "cluster",
+        "rev": "f8b11e0512b864f165a4a086713b41a0e3d622ea",
+        "type": "git",
+        "url": "https://github.com/juspay/hedis"
       }
     },
     "hnix-store-core": {
@@ -1045,6 +1247,9 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7ce13af (resolved errors)
     "hnix-store-core_3": {
       "flake": false,
       "locked": {
@@ -1062,8 +1267,31 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
 =======
 >>>>>>> 457d059 (added redis-cluster)
+=======
+    "juspay-extra": {
+      "inputs": {
+        "euler-build": "euler-build_2"
+      },
+      "locked": {
+        "lastModified": 1650615771,
+        "narHash": "sha256-SrEmUlhUN5/VPm+2/Pphh4Z09oXpPqqChr8scTUqiE8=",
+        "ref": "master",
+        "rev": "b673307a0362690fceddc3a585c0a97f0794f16e",
+        "revCount": 52,
+        "type": "git",
+        "url": "ssh://git@ssh.bitbucket.juspay.net/jbiz/euler-haskell-common"
+      },
+      "original": {
+        "ref": "master",
+        "rev": "b673307a0362690fceddc3a585c0a97f0794f16e",
+        "type": "git",
+        "url": "ssh://git@ssh.bitbucket.juspay.net/jbiz/euler-haskell-common"
+      }
+    },
+>>>>>>> 7ce13af (resolved errors)
     "lowdown-src": {
       "flake": false,
       "locked": {
@@ -1097,6 +1325,9 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7ce13af (resolved errors)
     "lowdown-src_3": {
       "flake": false,
       "locked": {
@@ -1113,8 +1344,11 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
 =======
 >>>>>>> 457d059 (added redis-cluster)
+=======
+>>>>>>> 7ce13af (resolved errors)
     "mission-control": {
       "locked": {
         "lastModified": 1680209746,
@@ -1146,6 +1380,9 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7ce13af (resolved errors)
     "mission-control_3": {
       "locked": {
         "lastModified": 1680209746,
@@ -1161,8 +1398,11 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
 =======
 >>>>>>> 457d059 (added redis-cluster)
+=======
+>>>>>>> 7ce13af (resolved errors)
     "mysql-haskell": {
       "flake": false,
       "locked": {
@@ -1207,6 +1447,44 @@
         "type": "github"
       }
     },
+    "nix-inclusive": {
+      "inputs": {
+        "stdlib": "stdlib"
+      },
+      "locked": {
+        "lastModified": 1604413592,
+        "narHash": "sha256-3cr2RRBCXNb+6Q1s3tEQiN4LjoFC8OsMSG8WuCyGe/g=",
+        "owner": "juspay",
+        "repo": "nix-inclusive",
+        "rev": "2ca1706029bfcf4bb7eaf17b4f32e49f436a148e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "juspay",
+        "repo": "nix-inclusive",
+        "rev": "2ca1706029bfcf4bb7eaf17b4f32e49f436a148e",
+        "type": "github"
+      }
+    },
+    "nix-inclusive_2": {
+      "inputs": {
+        "stdlib": "stdlib_2"
+      },
+      "locked": {
+        "lastModified": 1604413592,
+        "narHash": "sha256-3cr2RRBCXNb+6Q1s3tEQiN4LjoFC8OsMSG8WuCyGe/g=",
+        "owner": "juspay",
+        "repo": "nix-inclusive",
+        "rev": "2ca1706029bfcf4bb7eaf17b4f32e49f436a148e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "juspay",
+        "repo": "nix-inclusive",
+        "rev": "2ca1706029bfcf4bb7eaf17b4f32e49f436a148e",
+        "type": "github"
+      }
+    },
     "nix_2": {
       "inputs": {
         "lowdown-src": "lowdown-src_2",
@@ -1236,6 +1514,9 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7ce13af (resolved errors)
     "nix_3": {
       "inputs": {
         "lowdown-src": "lowdown-src_3",
@@ -1265,8 +1546,11 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
 =======
 >>>>>>> 457d059 (added redis-cluster)
+=======
+>>>>>>> 7ce13af (resolved errors)
     "nixpkgs": {
       "locked": {
         "lastModified": 1677534593,
@@ -1481,6 +1765,9 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7ce13af (resolved errors)
     "nixpkgs-regression_3": {
       "locked": {
         "lastModified": 1643052045,
@@ -1497,8 +1784,11 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
 =======
 >>>>>>> 457d059 (added redis-cluster)
+=======
+>>>>>>> 7ce13af (resolved errors)
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1673800717,
@@ -1564,6 +1854,9 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7ce13af (resolved errors)
     "nixpkgs-stable_5": {
       "locked": {
         "lastModified": 1673800717,
@@ -1596,8 +1889,11 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
 =======
 >>>>>>> 457d059 (added redis-cluster)
+=======
+>>>>>>> 7ce13af (resolved errors)
     "nixpkgs_10": {
       "locked": {
         "lastModified": 1680945546,
@@ -1617,6 +1913,9 @@
     "nixpkgs_11": {
       "locked": {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7ce13af (resolved errors)
         "lastModified": 1677534593,
         "narHash": "sha256-PuZSAHeq4/9pP/uYH1FcagQ3nLm/DrDrvKi/xC9glvw=",
         "owner": "NixOS",
@@ -1627,25 +1926,17 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixpkgs-unstable",
+<<<<<<< HEAD
 =======
         "lastModified": 1675545634,
         "narHash": "sha256-TbQeQcM5TA/wIho6xtzG+inUfiGzUXi8ewwttiQWYJE=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "0591d6b57bfeb55dfeec99a671843337bc2c3323",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
->>>>>>> 457d059 (added redis-cluster)
+=======
         "repo": "nixpkgs",
         "type": "github"
       }
     },
     "nixpkgs_12": {
       "locked": {
-<<<<<<< HEAD
         "lastModified": 1678072060,
         "narHash": "sha256-6a9Tbjhir5HxDx4uw0u6Z+LHUfYf7tsT9QxF9FN/32w=",
         "owner": "NixOS",
@@ -1664,6 +1955,7 @@
       "locked": {
         "lastModified": 1681358109,
         "narHash": "sha256-eKyxW4OohHQx9Urxi7TQlFBTDWII+F+x2hklDOQPB50=",
+>>>>>>> 7ce13af (resolved errors)
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "96ba1c52e54e74c3197f4d43026b3f3d92e83ff9",
@@ -1704,6 +1996,96 @@
       "original": {
         "owner": "nixos",
         "ref": "nixos-unstable",
+>>>>>>> 457d059 (added redis-cluster)
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_16": {
+      "locked": {
+<<<<<<< HEAD
+<<<<<<< HEAD
+        "lastModified": 1678072060,
+        "narHash": "sha256-6a9Tbjhir5HxDx4uw0u6Z+LHUfYf7tsT9QxF9FN/32w=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "47c003416297e4d59a5e3e7a8b15cdbdf5110560",
+=======
+        "lastModified": 1618072958,
+        "narHash": "sha256-QDKj58ECixtb4EJMWV5D5Lb2xdCgab1Opi4zjQWbDOg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a73020b2a150322c9832b50baeb0296ba3b13dd7",
+>>>>>>> 7ce13af (resolved errors)
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+<<<<<<< HEAD
+        "ref": "nixos-22.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_13": {
+      "locked": {
+        "lastModified": 1681358109,
+        "narHash": "sha256-eKyxW4OohHQx9Urxi7TQlFBTDWII+F+x2hklDOQPB50=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "96ba1c52e54e74c3197f4d43026b3f3d92e83ff9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_14": {
+      "locked": {
+        "lastModified": 1681303793,
+        "narHash": "sha256-JEdQHsYuCfRL2PICHlOiH/2ue3DwoxUX7DJ6zZxZXFk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "fe2ecaf706a5907b5e54d979fbde4924d84b65fc",
+=======
+        "repo": "nixpkgs",
+        "rev": "a73020b2a150322c9832b50baeb0296ba3b13dd7",
+        "type": "github"
+      }
+    },
+    "nixpkgs_17": {
+      "locked": {
+        "lastModified": 1618072958,
+        "narHash": "sha256-QDKj58ECixtb4EJMWV5D5Lb2xdCgab1Opi4zjQWbDOg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a73020b2a150322c9832b50baeb0296ba3b13dd7",
+>>>>>>> 7ce13af (resolved errors)
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+<<<<<<< HEAD
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_15": {
+      "locked": {
+        "lastModified": 1680945546,
+        "narHash": "sha256-8FuaH5t/aVi/pR1XxnF0qi4WwMYC+YxlfdsA0V+TEuQ=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d9f759f2ea8d265d974a6e1259bd510ac5844c5d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -1722,6 +2104,20 @@
         "repo": "nixpkgs",
         "rev": "6ccc4a59c3f1b56d039d93da52696633e641bc71",
 >>>>>>> 457d059 (added redis-cluster)
+=======
+        "repo": "nixpkgs",
+        "rev": "a73020b2a150322c9832b50baeb0296ba3b13dd7",
+        "type": "github"
+      }
+    },
+    "nixpkgs_18": {
+      "locked": {
+        "lastModified": 1683020768,
+        "narHash": "sha256-ZyZl6k9NWS5QPwD3NoAVz/eSgodQDvl+y+fu8MVbrHc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "44f30edf5661d86fb3a95841c35127f3d0ea8b0f",
+>>>>>>> 7ce13af (resolved errors)
         "type": "github"
       },
       "original": {
@@ -2072,6 +2468,28 @@
         "type": "github"
       }
     },
+    "pre-commit-hooks-nix_3": {
+      "inputs": {
+        "flake-compat": "flake-compat_6",
+        "flake-utils": "flake-utils_6",
+        "gitignore": "gitignore_6",
+        "nixpkgs": "nixpkgs_14",
+        "nixpkgs-stable": "nixpkgs-stable_6"
+      },
+      "locked": {
+        "lastModified": 1682596858,
+        "narHash": "sha256-Hf9XVpqaGqe/4oDGr30W8HlsWvJXtMsEPHDqHZA6dDg=",
+        "owner": "cachix",
+        "repo": "pre-commit-hooks.nix",
+        "rev": "fb58866e20af98779017134319b5663b8215d912",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "repo": "pre-commit-hooks.nix",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks_2": {
       "inputs": {
         "flake-compat": [
@@ -2093,6 +2511,44 @@
           "nixpkgs"
         ],
         "nixpkgs-stable": "nixpkgs-stable_3"
+      },
+      "locked": {
+        "lastModified": 1677160285,
+        "narHash": "sha256-tBzpCjMP+P3Y3nKLYvdBkXBg3KvTMo3gvi8tLQaqXVY=",
+        "owner": "cachix",
+        "repo": "pre-commit-hooks.nix",
+        "rev": "2bd861ab81469428d9c823ef72c4bb08372dd2c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "repo": "pre-commit-hooks.nix",
+        "type": "github"
+      }
+    },
+    "pre-commit-hooks_3": {
+      "inputs": {
+        "flake-compat": [
+          "shared-kernel",
+          "euler-hs",
+          "common",
+          "cachix-push",
+          "cachix",
+          "devenv",
+          "flake-compat"
+        ],
+        "flake-utils": "flake-utils_5",
+        "gitignore": "gitignore_5",
+        "nixpkgs": [
+          "shared-kernel",
+          "euler-hs",
+          "common",
+          "cachix-push",
+          "cachix",
+          "devenv",
+          "nixpkgs"
+        ],
+        "nixpkgs-stable": "nixpkgs-stable_5"
       },
       "locked": {
         "lastModified": 1677160285,
@@ -2139,6 +2595,9 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7ce13af (resolved errors)
     "process-compose-flake_3": {
       "locked": {
         "lastModified": 1680797953,
@@ -2154,6 +2613,7 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
     "prometheus-haskell": {
       "inputs": {
         "flake-parts": "flake-parts_4",
@@ -2184,6 +2644,8 @@
         "common": "common",
         "shared-kernel": "shared-kernel"
 =======
+=======
+>>>>>>> 7ce13af (resolved errors)
     "root": {
       "inputs": {
         "common": "common",
@@ -2203,18 +2665,26 @@
     "sequelize": {
       "flake": false,
       "locked": {
-        "lastModified": 1657529023,
-        "narHash": "sha256-su4fGXqcrxC1kDlomt7dqmU3HAlkcd9MYaLPyK1vXXc=",
-        "owner": "juspay",
-        "repo": "haskell-sequelize",
-        "rev": "3abc8fe10edde3fd1c9a776ede81d057dc590341",
-        "type": "github"
+        "lastModified": 1681201214,
+        "narHash": "sha256-txn9WX6iahjd1tHU6OU0LzmdZC7ObxY8LnxcBvpstKI=",
+        "ref": "master",
+        "rev": "92b7a0efc72a531580bec3c686a0619a49bc0685",
+        "revCount": 110,
+        "type": "git",
+        "url": "ssh://git@ssh.bitbucket.juspay.net/exc/haskell-sequelize"
       },
       "original": {
+<<<<<<< HEAD
         "owner": "juspay",
         "ref": "beckn-compatible",
         "repo": "haskell-sequelize",
         "type": "github"
+=======
+        "ref": "master",
+        "rev": "92b7a0efc72a531580bec3c686a0619a49bc0685",
+        "type": "git",
+        "url": "ssh://git@ssh.bitbucket.juspay.net/exc/haskell-sequelize"
+>>>>>>> 7ce13af (resolved errors)
       }
     },
     "shared-kernel": {
@@ -2245,18 +2715,52 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1682735931,
-        "narHash": "sha256-56Yhq+KWeo030nU03kPbIRnpMUvSozEPrjDRzEcNshA=",
+        "lastModified": 1683288426,
+        "narHash": "sha256-bA+aMisI3jo+2N6rnLYOlVDIA9GkD9Jw+dR1mSCsYJU=",
         "owner": "nammayatri",
         "repo": "shared-kernel",
+<<<<<<< HEAD
         "rev": "a2386e904104824aec87be94f27ae1931d46165c",
 >>>>>>> 457d059 (added redis-cluster)
+=======
+        "rev": "fa707c9e3cdc3951eff56349efdc9766d855966d",
+>>>>>>> 7ce13af (resolved errors)
         "type": "github"
       },
       "original": {
         "owner": "nammayatri",
+        "ref": "updatedEulerHS",
         "repo": "shared-kernel",
-        "rev": "a2386e904104824aec87be94f27ae1931d46165c",
+        "type": "github"
+      }
+    },
+    "stdlib": {
+      "locked": {
+        "lastModified": 1590026685,
+        "narHash": "sha256-E5INrVvYX/P/UpcoUFDAsuHem+lsqT+/teBs9O7oc9Q=",
+        "owner": "manveru",
+        "repo": "nix-lib",
+        "rev": "99088cf7febcdb21afd375a335dcafa959bef3ed",
+        "type": "github"
+      },
+      "original": {
+        "owner": "manveru",
+        "repo": "nix-lib",
+        "type": "github"
+      }
+    },
+    "stdlib_2": {
+      "locked": {
+        "lastModified": 1590026685,
+        "narHash": "sha256-E5INrVvYX/P/UpcoUFDAsuHem+lsqT+/teBs9O7oc9Q=",
+        "owner": "manveru",
+        "repo": "nix-lib",
+        "rev": "99088cf7febcdb21afd375a335dcafa959bef3ed",
+        "type": "github"
+      },
+      "original": {
+        "owner": "manveru",
+        "repo": "nix-lib",
         "type": "github"
       }
     },
@@ -2347,10 +2851,14 @@
     "treefmt-nix_3": {
       "inputs": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "nixpkgs": "nixpkgs_15"
 =======
         "nixpkgs": "nixpkgs_11"
 >>>>>>> 457d059 (added redis-cluster)
+=======
+        "nixpkgs": "nixpkgs_15"
+>>>>>>> 7ce13af (resolved errors)
       },
       "locked": {
         "lastModified": 1682536470,

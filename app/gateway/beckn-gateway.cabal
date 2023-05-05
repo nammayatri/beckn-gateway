@@ -89,6 +89,7 @@ library
     , text
     , wai
     , warp
+    , unordered-containers
   default-language: Haskell2010
 
 executable beckn-gateway-exe
