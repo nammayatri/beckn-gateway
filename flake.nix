@@ -5,7 +5,7 @@
     flake-parts.follows = "common/flake-parts";
     systems.url = "github:nix-systems/default";
 
-    shared-kernel.url = "github:nammayatri/shared-kernel";
+    shared-kernel.url = "github:nammayatri/shared-kernel/44fc284a8b0708feeb343433801d043aecb3a863";
     shared-kernel.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs@{ nixpkgs, flake-parts, ... }:

@@ -1540,19 +1540,21 @@
           "nixpkgs"
         ],
         "passetto-hs": "passetto-hs",
-        "systems": "systems"
+        "systems": "systems",
+        "wai-middleware-prometheus": "wai-middleware-prometheus"
       },
       "locked": {
-        "lastModified": 1683215542,
-        "narHash": "sha256-DPVGr4UqmJZB6vEbrzIpAGHNc5cVWvI+JcJqzPzjR/A=",
+        "lastModified": 1683811014,
+        "narHash": "sha256-To6Ay670+1JQmb7tWRPjr5MeUxVVrpKe1zKMHVK2zck=",
         "owner": "nammayatri",
         "repo": "shared-kernel",
-        "rev": "2c4c6799717d331e24f618f6b8304397ec18a551",
+        "rev": "44fc284a8b0708feeb343433801d043aecb3a863",
         "type": "github"
       },
       "original": {
         "owner": "nammayatri",
         "repo": "shared-kernel",
+        "rev": "44fc284a8b0708feeb343433801d043aecb3a863",
         "type": "github"
       }
     },
@@ -1637,6 +1639,23 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "wai-middleware-prometheus": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1683787868,
+        "narHash": "sha256-grMA1QZJmgCjKIVXrKMLGlqfgU06dQCZtZvx+T+aMoE=",
+        "owner": "roman-bodavskiy",
+        "repo": "prometheus-haskell",
+        "rev": "8567d5d3a6e32cc192f5c9d5b8e71d71ba461263",
+        "type": "github"
+      },
+      "original": {
+        "owner": "roman-bodavskiy",
+        "ref": "added-generic-label",
+        "repo": "prometheus-haskell",
         "type": "github"
       }
     }
