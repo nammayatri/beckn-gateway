@@ -29,7 +29,7 @@ import Servant
 run :: EnvR AppEnv -> Application
 run = withModifiedEnv $ \modifiedEnv ->
   BU.run gatewayAPI gatewayServer context modifiedEnv
-    & addServantInfo gatewayAPI
+    & addServantInfo modifiedEnv.appEnv.version gatewayAPI
     & hashBodyForSignature
     & supportProxyAuthorization
   where
