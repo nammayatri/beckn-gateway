@@ -5,12 +5,9 @@
     shared-kernel.url = "github:nammayatri/shared-kernel";
     shared-kernel.inputs.common.follows = "common";
   };
-  outputs = inputs: inputs.common.inputs.flake-parts.lib.mkFlake
-    { inputs = inputs // { inherit (inputs.common.inputs) nixpkgs; }; }
-    {
-      systems = import inputs.common.inputs.systems;
+  outputs = inputs:
+    inputs.common.lib.mkFlake { inherit inputs; } {
       imports = [
-        inputs.common.flakeModules.default
         ./nix/arion-configuration.nix
         ./nix/docker.nix
       ];
