@@ -1,16 +1,14 @@
 {
   inputs = {
     common.url = "github:nammayatri/common";
-    nixpkgs.follows = "common/nixpkgs";
-    flake-parts.follows = "common/flake-parts";
-    systems.url = "github:nix-systems/default";
 
     shared-kernel.url = "github:nammayatri/shared-kernel";
-    shared-kernel.inputs.nixpkgs.follows = "nixpkgs";
+    shared-kernel.inputs.common.follows = "common";
   };
-  outputs = inputs@{ nixpkgs, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = import inputs.systems;
+  outputs = inputs: inputs.common.inputs.flake-parts.lib.mkFlake
+    { inputs = inputs // { inherit (inputs.common.inputs) nixpkgs; }; }
+    {
+      systems = import inputs.common.inputs.systems;
       imports = [
         inputs.common.flakeModules.default
         ./nix/arion-configuration.nix
