@@ -32,6 +32,7 @@ dhall-configs/dev/secrets/top-secret.dhall
 
 # Nix
 result
+result-*
 .direnv
 .pre-commit-config.yaml
 .hie-bios-cache
