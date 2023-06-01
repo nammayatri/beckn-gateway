@@ -39,6 +39,8 @@ mkPersist
       uniqueKeyId Text
       subscriberId Text
       subscriberUrl Text
+      imageUrl Text Maybe
+      name Text Maybe
       subscriberType Domain.SubscriberType sql=type
       domain Domain.Domain
       city Text Maybe
@@ -63,11 +65,13 @@ instance TEntityKey SubscriberT where
 instance FromTType SubscriberT Domain.Subscriber where
   fromTType SubscriberT {..} = do
     subscriberUrl_ <- parseBaseUrl subscriberUrl
+    imageUrl_ <- mapM parseBaseUrl imageUrl
     return $
       Domain.Subscriber
         { unique_key_id = uniqueKeyId,
           subscriber_id = subscriberId,
           subscriber_url = subscriberUrl_,
+          image_url = imageUrl_,
           signing_public_key = signingPublicKey,
           encr_public_key = encrPublicKey,
           valid_from = validFrom,
@@ -81,6 +85,7 @@ instance ToTType SubscriberT Domain.Subscriber where
     SubscriberT
       { uniqueKeyId = unique_key_id,
         subscriberId = subscriber_id,
+        imageUrl = showBaseUrl <$> image_url,
         subscriberUrl = showBaseUrl subscriber_url,
         signingPublicKey = signing_public_key,
         encrPublicKey = encr_public_key,
