@@ -87,6 +87,7 @@ library
     , servant-client
     , servant-server
     , text
+    , unordered-containers
     , wai
     , warp
     , unordered-containers
@@ -139,4 +140,5 @@ executable beckn-gateway-exe
     , euler-hs
     , record-dot-preprocessor
     , record-hasfield
+    , unordered-containers
   default-language: Haskell2010
