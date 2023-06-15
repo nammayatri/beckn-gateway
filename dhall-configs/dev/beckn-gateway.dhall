@@ -35,4 +35,6 @@ in  { hedisCfg = rcfg
     , longDurationRetryCfg = common.longDurationRetryCfg
     , registryUrl = common.registryUrl
     , disableSignatureAuth = False
+    , enablePrometheusMetricLogging = True
+    , enableRedisLatencyLogging = True
     }
