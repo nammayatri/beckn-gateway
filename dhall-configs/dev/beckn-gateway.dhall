@@ -14,6 +14,8 @@ let rcfg =
 
 in  { hedisCfg = rcfg
     , hedisClusterCfg = rcfg
+    , hedisNonCriticalCfg = rcfg
+    , hedisNonCriticalClusterCfg = rcfg
     , hedisMigrationStage = True
     , cutOffHedisCluster = False
     , port = +8015
