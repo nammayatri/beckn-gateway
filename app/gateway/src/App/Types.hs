@@ -50,7 +50,9 @@ data AppCfg = AppCfg
     shortDurationRetryCfg :: RetryCfg,
     longDurationRetryCfg :: RetryCfg,
     registryUrl :: BaseUrl,
-    disableSignatureAuth :: Bool
+    disableSignatureAuth :: Bool,
+    enablePrometheusMetricLogging :: Bool,
+    enableRedisLatencyLogging :: Bool
   }
   deriving (Generic, FromDhall)
 
@@ -73,7 +75,9 @@ data AppEnv = AppEnv
     isShuttingDown :: TMVar (),
     coreMetrics :: CoreMetricsContainer,
     loggerEnv :: LoggerEnv,
-    version :: DeploymentVersion
+    version :: DeploymentVersion,
+    enablePrometheusMetricLogging :: Bool,
+    enableRedisLatencyLogging :: Bool
   }
   deriving (Generic)
 
