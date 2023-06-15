@@ -35,6 +35,8 @@ import Tools.Metrics
 data AppCfg = AppCfg
   { hedisCfg :: Redis.HedisCfg,
     hedisClusterCfg :: Redis.HedisCfg,
+    hedisNonCriticalCfg :: Redis.HedisCfg,
+    hedisNonCriticalClusterCfg :: Redis.HedisCfg,
     hedisMigrationStage :: Bool,
     cutOffHedisCluster :: Bool,
     port :: Int,
@@ -55,6 +57,8 @@ data AppCfg = AppCfg
 data AppEnv = AppEnv
   { hedisEnv :: Redis.HedisEnv,
     hedisClusterEnv :: Redis.HedisEnv,
+    hedisNonCriticalEnv :: Redis.HedisEnv,
+    hedisNonCriticalClusterEnv :: Redis.HedisEnv,
     hedisMigrationStage :: Bool,
     cutOffHedisCluster :: Bool,
     hostName :: Text,
@@ -91,6 +95,11 @@ buildAppEnv AppCfg {..} = do
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
   let modifierFunc = ("gateway:" <>)
   hedisEnv <- Redis.connectHedis hedisCfg modifierFunc
+  hedisNonCriticalEnv <- Redis.connectHedis hedisNonCriticalCfg modifierFunc
+  hedisNonCriticalClusterEnv <-
+    if cutOffHedisCluster
+      then pure hedisNonCriticalEnv
+      else Redis.connectHedisCluster hedisNonCriticalClusterCfg modifierFunc
   hedisClusterEnv <-
     if cutOffHedisCluster
       then pure hedisEnv
