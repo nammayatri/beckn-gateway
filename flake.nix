@@ -2,7 +2,7 @@
   inputs = {
     common.url = "github:nammayatri/common";
 
-    shared-kernel.url = "github:nammayatri/shared-kernel";
+    shared-kernel.url = "github:nammayatri/shared-kernel/fb11c4fa76d3de4980f19aa3e9352ec04b4e7c06";
   };
   outputs = inputs:
     inputs.common.lib.mkFlake { inherit inputs; } {

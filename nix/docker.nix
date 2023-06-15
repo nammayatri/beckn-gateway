@@ -12,13 +12,15 @@ in
       packages = {
         dockerImage =
           let
+            beckn-gateway = lib.getBin self'.packages.beckn-gateway;
+
             # Wrap the package so that its binaries are in /opt/app.
             #
             # Rationale: Our k8s deployment config is hardcoded to look for exes
             # under /opt/app
             beckn-gateway-in-opt = pkgs.symlinkJoin {
               name = "beckn-gateway-exes-opt";
-              paths = [ self'.packages.beckn-gateway ];
+              paths = [ beckn-gateway ];
               postBuild = ''
                 mkdir $out/opt && mv $out/bin $out/opt/app
               '';
@@ -50,8 +52,15 @@ in
                 # Ref: https://hackage.haskell.org/package/x509-system-1.6.7/docs/src/System.X509.Unix.html#getSystemCertificateStore
                 "SYSTEM_CERTIFICATE_PATH=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
               ];
-              Cmd = [ "${lib.getExe self'.packages.beckn-gateway}" ];
+              Cmd = [ "${lib.getExe beckn-gateway}" ];
             };
+
+            # Test that the docker image contains contents we expected for
+            # production.
+            extraCommands = ''
+              # Executables are under /opt/app
+              ls opt/app/beckn-gateway-exe
+            '';
           };
       };
     };

@@ -54,6 +54,8 @@ data AppCfg = AppCfg
 
 data AppEnv = AppEnv
   { hedisEnv :: Redis.HedisEnv,
+    hedisNonCriticalEnv :: Redis.HedisEnv,
+    hedisNonCriticalClusterEnv :: Redis.HedisEnv,
     hedisClusterEnv :: Redis.HedisEnv,
     hedisMigrationStage :: Bool,
     cutOffHedisCluster :: Bool,
@@ -91,6 +93,11 @@ buildAppEnv AppCfg {..} = do
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
   let modifierFunc = ("gateway:" <>)
   hedisEnv <- Redis.connectHedis hedisCfg modifierFunc
+  hedisNonCriticalEnv <- Redis.connectHedis hedisCfg modifierFunc
+  hedisNonCriticalClusterEnv <-
+    if cutOffHedisCluster
+      then pure hedisNonCriticalEnv
+      else Redis.connectHedisCluster hedisClusterCfg modifierFunc
   hedisClusterEnv <-
     if cutOffHedisCluster
       then pure hedisEnv
