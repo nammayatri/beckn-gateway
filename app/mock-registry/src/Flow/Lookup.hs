@@ -25,7 +25,7 @@ import Storage.Queries.Subscriber as Sub
 
 lookup :: LookupRequest -> FlowHandler LookupResponse
 lookup req = withFlowHandlerAPI $ do
-  findByAll req.unique_key_id req.subscriber_id req.domain req._type ((.name) =<< req.city)
+  findByAll req.unique_key_id req.subscriber_id req.domain req._type req.city
 
 create :: Subscriber -> FlowHandler AckResponse
 create sub = withFlowHandlerAPI $ do
