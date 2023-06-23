@@ -13,6 +13,7 @@ in
         dockerImage =
           let
             beckn-gateway = lib.getBin self'.packages.beckn-gateway;
+            mock-registry = lib.getBin self'.packages.mock-registry;
 
             # Wrap the package so that its binaries are in /opt/app.
             #
@@ -20,7 +21,10 @@ in
             # under /opt/app
             beckn-gateway-in-opt = pkgs.symlinkJoin {
               name = "beckn-gateway-exes-opt";
-              paths = [ beckn-gateway ];
+              paths = [
+                beckn-gateway
+                mock-registry
+              ];
               postBuild = ''
                 mkdir $out/opt && mv $out/bin $out/opt/app
               '';
@@ -60,6 +64,7 @@ in
             extraCommands = ''
               # Executables are under /opt/app
               ls opt/app/beckn-gateway-exe
+              ls opt/app/mock-registry-exe
             '';
           };
       };
