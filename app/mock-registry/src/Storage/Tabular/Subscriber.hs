@@ -25,8 +25,7 @@ import qualified Domain.Subscriber as Domain
 import Kernel.Prelude
 import Kernel.Storage.Esqueleto
 import Kernel.Types.Base64
-
-derivePersistField "Domain.Domain"
+import Kernel.Types.Beckn.Context as Context
 
 derivePersistField "Domain.SubscriberStatus"
 
@@ -40,9 +39,9 @@ mkPersist
       subscriberId Text
       subscriberUrl Text
       subscriberType Domain.SubscriberType sql=type
-      domain Domain.Domain
-      city Text Maybe
-      country Text Maybe
+      domain Context.Domain
+      city Context.City Maybe
+      country Context.Country Maybe
       signingPublicKey Base64
       encrPublicKey Base64 Maybe
       validFrom UTCTime Maybe

@@ -32,7 +32,6 @@ library
       Types.API.Search
       Types.Beckn.API.Callback
       Types.Beckn.Context
-      Types.Beckn.Domain
       Types.Error
       Utils.Common
   other-modules:
