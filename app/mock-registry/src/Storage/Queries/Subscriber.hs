@@ -18,10 +18,12 @@ module Storage.Queries.Subscriber where
 import Domain.Subscriber
 import Kernel.Prelude
 import Kernel.Storage.Esqueleto as Esq
+import Kernel.Types.Beckn.City as Context
+import Kernel.Types.Beckn.Domain as Context
 import Kernel.Types.Common
 import Storage.Tabular.Subscriber
 
-findByAll :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Domain -> Maybe SubscriberType -> Maybe Text -> m [Subscriber]
+findByAll :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Context.Domain -> Maybe SubscriberType -> Maybe Context.City -> m [Subscriber]
 findByAll mbKeyId mbSubId mbDomain mbSubType mbCity =
   Esq.findAll $ do
     parkingLocation <- from $ table @SubscriberT
