@@ -569,6 +569,7 @@
         "sequelize": "sequelize"
       },
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1685470338,
         "narHash": "sha256-Kf/aXZbrY4yUMQEsB0iUzP12o0zy+1/BAmwidRIp0iQ=",
         "owner": "nammayatri",
@@ -592,6 +593,13 @@
         "ref": "ny-compatible",
         "rev": "584929c38de58509e985474b700da7fbc9c3b6a4",
         "revCount": 2115,
+=======
+        "lastModified": 1688551247,
+        "narHash": "sha256-Y6p6hHQkKvSNpeYTzuqMdzwCbbACz7+jysbF/vCiq5U=",
+        "ref": "ny-compatible",
+        "rev": "93e95e2658f26c50d99dc0d5251fd563c1a07f36",
+        "revCount": 2119,
+>>>>>>> 1f85ad6 (added manager selector fixes)
         "type": "git",
         "url": "ssh://git@ssh.bitbucket.juspay.net/iris/euler-hs"
       },
@@ -2698,6 +2706,7 @@
       },
       "locked": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "lastModified": 1688655483,
         "narHash": "sha256-/zADpUhBwiqxUsx6VFnlJDH3tiwe/xzZdQoDjXoF4sI=",
         "owner": "nammayatri",
@@ -2733,6 +2742,13 @@
         "repo": "shared-kernel",
         "rev": "62edd45267feaaee0fa5688ba29386be8f1a6514",
 >>>>>>> 887a54b (updated shared kernel)
+=======
+        "lastModified": 1688552352,
+        "narHash": "sha256-QuAq/RE/GQL9hEjwEhOScCNjYI51FPE51RwER+Fv554=",
+        "owner": "nammayatri",
+        "repo": "shared-kernel",
+        "rev": "619450da8fb4b66e4f18cba9057b52c37afd4839",
+>>>>>>> 1f85ad6 (added manager selector fixes)
         "type": "github"
       },
       "original": {
