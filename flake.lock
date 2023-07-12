@@ -581,6 +581,7 @@
       "locked": {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "lastModified": 1685470338,
         "narHash": "sha256-Kf/aXZbrY4yUMQEsB0iUzP12o0zy+1/BAmwidRIp0iQ=",
         "owner": "nammayatri",
@@ -629,15 +630,19 @@
 =======
         "lastModified": 1688649802,
         "narHash": "sha256-K2cjcArlD8amdQ521h0Tom1ejG8aP7NC/TL1kOP3A48=",
+=======
+        "lastModified": 1689145127,
+        "narHash": "sha256-gv6JZHOzWkdaBLAZ/En5Jrbr6tTBJbQz5yDh0HqnP6M=",
+>>>>>>> 5e18399 (updated shared kernel ref)
         "owner": "juspay",
         "repo": "euler-hs",
-        "rev": "aac2c0fd84a54e7ee108578d8bce45f1a6d03d9f",
+        "rev": "52c9b0af6ab45e82500c3acfae2c1f7fd983a5ad",
         "type": "github"
       },
       "original": {
         "owner": "juspay",
         "repo": "euler-hs",
-        "rev": "aac2c0fd84a54e7ee108578d8bce45f1a6d03d9f",
+        "rev": "52c9b0af6ab45e82500c3acfae2c1f7fd983a5ad",
         "type": "github"
 >>>>>>> af7d5c7 (flake update)
       }
@@ -1273,6 +1278,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "lastModified": 1685620412,
         "narHash": "sha256-cPRZRbR76M7fBNSXcrSOqLlIcs2KSj/Ynf0AdZ46qrE=",
         "owner": "juspay",
@@ -1313,6 +1319,19 @@
         "rev": "22d814672d8476a6f8fb43047af2897afbf77ac6",
         "type": "github"
 >>>>>>> af7d5c7 (flake update)
+=======
+        "lastModified": 1685620412,
+        "narHash": "sha256-cPRZRbR76M7fBNSXcrSOqLlIcs2KSj/Ynf0AdZ46qrE=",
+        "rev": "92a3d5ab73dcb0ea11139a01d6f2950a8b8e7e0e",
+        "revCount": 712,
+        "type": "git",
+        "url": "https://github.com/juspay/hedis"
+      },
+      "original": {
+        "rev": "92a3d5ab73dcb0ea11139a01d6f2950a8b8e7e0e",
+        "type": "git",
+        "url": "https://github.com/juspay/hedis"
+>>>>>>> 5e18399 (updated shared kernel ref)
       }
     },
     "hnix-store-core": {
@@ -2901,6 +2920,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         "lastModified": 1688655483,
         "narHash": "sha256-/zADpUhBwiqxUsx6VFnlJDH3tiwe/xzZdQoDjXoF4sI=",
         "owner": "nammayatri",
@@ -2950,6 +2970,13 @@
         "repo": "shared-kernel",
         "rev": "7d5010b6c9c90ce24df1cd5d363081f0a10285f3",
 >>>>>>> af7d5c7 (flake update)
+=======
+        "lastModified": 1689148606,
+        "narHash": "sha256-w9/L6oV5sGPnTYs/jF1IeMUK9Z0LRW3R7qdQ7TAIdts=",
+        "owner": "nammayatri",
+        "repo": "shared-kernel",
+        "rev": "95d44b60ff059031831df43572d434befb388611",
+>>>>>>> 5e18399 (updated shared kernel ref)
         "type": "github"
       },
       "original": {
