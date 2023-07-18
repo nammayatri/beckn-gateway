@@ -52,7 +52,8 @@ data AppCfg = AppCfg
     registryUrl :: BaseUrl,
     disableSignatureAuth :: Bool,
     enablePrometheusMetricLogging :: Bool,
-    enableRedisLatencyLogging :: Bool
+    enableRedisLatencyLogging :: Bool,
+    envPrefix :: Text
   }
   deriving (Generic, FromDhall)
 
@@ -77,7 +78,8 @@ data AppEnv = AppEnv
     loggerEnv :: LoggerEnv,
     version :: DeploymentVersion,
     enablePrometheusMetricLogging :: Bool,
-    enableRedisLatencyLogging :: Bool
+    enableRedisLatencyLogging :: Bool,
+    envPrefix :: Text
   }
   deriving (Generic)
 
