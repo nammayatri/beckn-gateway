@@ -15,7 +15,7 @@
 module Types.API.Gateway.Search where
 
 import EulerHS.Prelude
-import Kernel.Types.Beckn.Ack
+import Kernel.Types.Beckn.BecknAPIResponse
 import Kernel.Utils.Servant.JSONBS
 import Kernel.Utils.SignatureAuth
 import Servant
@@ -24,7 +24,7 @@ type SearchAPI =
   "search"
     :> Header "Authorization" SignaturePayload
     :> ReqBody '[JSONBS] ByteString
-    :> Post '[JSON] AckResponse
+    :> Post '[JSON] BecknAPIResponse
 
 searchAPI :: Proxy SearchAPI
 searchAPI = Proxy
@@ -33,7 +33,7 @@ type OnSearchAPI =
   "on_search"
     :> Header "Authorization" SignaturePayload
     :> ReqBody '[JSONBS] ByteString
-    :> Post '[JSON] AckResponse
+    :> Post '[JSON] BecknAPIResponse
 
 onSearchAPI :: Proxy OnSearchAPI
 onSearchAPI = Proxy

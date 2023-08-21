@@ -23,7 +23,7 @@ import qualified Data.Aeson as A
 import qualified Data.Text as T
 import EulerHS.Prelude
 import qualified EulerHS.Types as ET
-import Kernel.Types.Beckn.Ack
+import Kernel.Types.Beckn.BecknAPIResponse
 import Kernel.Types.Error
 import Kernel.Utils.Error.BaseError.HTTPError.BecknAPIError (callBecknAPI')
 import Kernel.Utils.Servant.BaseUrl
@@ -38,7 +38,7 @@ import Utils.Common
 search ::
   SignatureAuthResult ->
   ByteString ->
-  FlowHandler AckResponse
+  FlowHandler BecknAPIResponse
 search (SignatureAuthResult proxySign _) rawReq = withFlowHandlerBecknAPI do
   req :: SearchReq <- rawReq & A.eitherDecodeStrict & fromEitherM (InvalidRequest . T.pack)
   withTransactionIdLogTag req $ do
@@ -58,12 +58,12 @@ search (SignatureAuthResult proxySign _) rawReq = withFlowHandlerBecknAPI do
             (gatewaySearchSignAuth (Just proxySign) rawReq)
             "search"
             ExternalAPI.searchAPI
-    return Ack
+    return getSuccessRes
 
 searchCb ::
   SignatureAuthResult ->
   ByteString ->
-  FlowHandler AckResponse
+  FlowHandler BecknAPIResponse
 searchCb (SignatureAuthResult proxySign _subscriber) rawReq = withFlowHandlerBecknAPI do
   req :: OnSearchReq <- rawReq & A.eitherDecodeStrict & fromEitherM (InvalidRequest . T.pack)
   withTransactionIdLogTag req . withLogTag "search_cb" $ do
@@ -80,4 +80,4 @@ searchCb (SignatureAuthResult proxySign _subscriber) rawReq = withFlowHandlerBec
           (gatewayOnSearchSignAuth (Just proxySign) rawReq)
           "on_search"
           ExternalAPI.onSearchAPI
-      return Ack
+      return getSuccessRes

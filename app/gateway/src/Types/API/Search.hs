@@ -24,7 +24,7 @@ where
 
 import Data.Aeson (Value)
 import EulerHS.Prelude
-import Kernel.Types.Beckn.Ack
+import Kernel.Types.Beckn.BecknAPIResponse
 import Kernel.Utils.Servant.JSONBS
 import Kernel.Utils.Servant.SignatureAuth
 import Servant hiding (Context)
@@ -42,7 +42,7 @@ type SearchAPI =
   SignatureAuth "Authorization"
     :> "search"
     :> ReqBody '[JSONBS] ByteString
-    :> Post '[JSON] AckResponse
+    :> Post '[JSON] BecknAPIResponse
 
 searchAPI :: Proxy SearchAPI
 searchAPI = Proxy
@@ -51,7 +51,7 @@ type OnSearchAPI =
   SignatureAuth "Authorization"
     :> "on_search"
     :> ReqBody '[JSONBS] ByteString
-    :> Post '[JSON] AckResponse
+    :> Post '[JSON] BecknAPIResponse
 
 onSearchAPI :: Proxy OnSearchAPI
 onSearchAPI = Proxy
