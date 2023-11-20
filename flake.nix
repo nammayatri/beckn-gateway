@@ -24,10 +24,8 @@
           autoWire = [ "packages" "checks" "apps" ];
         };
 
-        process-compose.configs.run.processes = {
-          beckn-gateway.command = lib.getExe self'.packages.beckn-gateway;
-          mock-registry.command = lib.getExe self'.packages.mock-registry;
-        };
+        # FIX ME: confirm what the "process-compose" field needs to be
+        process-compose = { };
 
         packages.default = self'.packages.beckn-gateway;
 
