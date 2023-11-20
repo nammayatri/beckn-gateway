@@ -1,6 +1,8 @@
 {
   inputs = {
     common.url = "github:nammayatri/common";
+    nixpkgs.follows = "common/nixpkgs";
+    haskell-flake.follows = "common/haskell-flake";
 
     shared-kernel.url = "github:nammayatri/shared-kernel";
   };
