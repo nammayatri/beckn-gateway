@@ -18,6 +18,7 @@ import qualified Data.Cache as C
 import qualified Data.Text as T
 import EulerHS.Prelude
 import qualified Kernel.Storage.Hedis as Redis
+import Kernel.Tools.Metrics.CoreMetrics as Metrics
 import Kernel.Types.App
 import Kernel.Types.Cache
 import Kernel.Types.Common hiding (id)
@@ -30,7 +31,6 @@ import qualified Kernel.Utils.Registry as Registry
 import Kernel.Utils.Servant.Client (HttpClientOptions, RetryCfg)
 import Kernel.Utils.Servant.SignatureAuth
 import System.Environment (lookupEnv)
-import Tools.Metrics
 
 data AppCfg = AppCfg
   { hedisCfg :: Redis.HedisCfg,
@@ -52,7 +52,8 @@ data AppCfg = AppCfg
     registryUrl :: BaseUrl,
     disableSignatureAuth :: Bool,
     enablePrometheusMetricLogging :: Bool,
-    enableRedisLatencyLogging :: Bool
+    enableRedisLatencyLogging :: Bool,
+    criticalAPIs :: Metrics.ApiPriorityList
   }
   deriving (Generic, FromDhall)
 
@@ -73,9 +74,10 @@ data AppEnv = AppEnv
     gwId :: Text,
     cache :: C.Cache Text Text,
     isShuttingDown :: TMVar (),
-    coreMetrics :: CoreMetricsContainer,
+    coreMetrics :: Metrics.CoreMetricsContainer,
     loggerEnv :: LoggerEnv,
-    version :: DeploymentVersion,
+    version :: Metrics.DeploymentVersion,
+    criticalAPIs :: Metrics.ApiPriorityList,
     enablePrometheusMetricLogging :: Bool,
     enableRedisLatencyLogging :: Bool
   }

@@ -12,6 +12,11 @@ let rcfg =
       , connectTimeout = None Integer
       }
 
+let criticalAPIs =
+      { criticalAPIList =
+        [ "/beckn/cab/v1/:merchantId/on_search/", "/beckn/:merchantId/search/" ]
+      }
+
 in  { hedisCfg = rcfg
     , hedisClusterCfg = rcfg
     , hedisNonCriticalCfg = rcfg

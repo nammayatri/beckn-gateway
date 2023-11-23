@@ -11,6 +11,8 @@ let esqDBCfg =
       , connectSchemaName = "atlas_registry"
       }
 
+let criticalAPIs = { criticalAPIList = [ "/lookup/" ] }
+
 in  { port = +8020
     , graceTerminationPeriod = +90
     , loggerConfig =
