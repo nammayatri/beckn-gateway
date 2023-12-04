@@ -54,6 +54,7 @@ search (SignatureAuthResult proxySign _) rawReq = withFlowHandlerBecknAPI' do
           callBecknAPI'
             (Just $ ET.ManagerSelector signatureAuthManagerKey)
             Nothing
+            Nothing
             providerUrl
             (gatewaySearchSignAuth (Just proxySign) rawReq)
             "search"
@@ -75,6 +76,7 @@ searchCb (SignatureAuthResult proxySign _subscriber) rawReq = withFlowHandlerBec
       void . withShortRetry $
         callBecknAPI'
           (Just $ ET.ManagerSelector signatureAuthManagerKey)
+          Nothing
           Nothing
           bapUri
           (gatewayOnSearchSignAuth (Just proxySign) rawReq)
