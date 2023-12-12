@@ -26,7 +26,7 @@ where
 
 import EulerHS.Prelude
 import Kernel.Storage.Esqueleto.Config
-import Kernel.Tools.Metrics.CoreMetrics (CoreMetricsContainer, DeploymentVersion, registerCoreMetricsContainer)
+import qualified Kernel.Tools.Metrics.CoreMetrics as Metrics
 import Kernel.Types.App
 import Kernel.Types.Common
 import Kernel.Types.Flow
@@ -41,7 +41,8 @@ data AppCfg = AppCfg
     graceTerminationPeriod :: Seconds,
     loggerConfig :: LoggerConfig,
     autoMigrate :: Bool,
-    migrationPath :: Maybe FilePath
+    migrationPath :: Maybe FilePath,
+    criticalAPIs :: Metrics.ApiPriorityList
   }
   deriving (Generic, FromDhall)
 
@@ -50,17 +51,18 @@ data AppEnv = AppEnv
     graceTerminationPeriod :: Seconds,
     loggerConfig :: LoggerConfig,
     isShuttingDown :: Shutdown,
-    coreMetrics :: CoreMetricsContainer,
+    coreMetrics :: Metrics.CoreMetricsContainer,
     loggerEnv :: LoggerEnv,
     esqDBEnv :: EsqDBEnv,
-    version :: DeploymentVersion
+    version :: Metrics.DeploymentVersion,
+    criticalAPIs :: Metrics.ApiPriorityList
   }
   deriving (Generic)
 
 buildAppEnv :: AppCfg -> IO AppEnv
 buildAppEnv AppCfg {..} = do
   isShuttingDown <- mkShutdown
-  coreMetrics <- registerCoreMetricsContainer
+  coreMetrics <- Metrics.registerCoreMetricsContainer
   hostname <- getPodName
   version <- lookupDeploymentVersion
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
