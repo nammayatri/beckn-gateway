@@ -20,19 +20,19 @@ import Kernel.Prelude
 import Kernel.Storage.Esqueleto
 import Kernel.Types.Beckn.Ack
 import Kernel.Types.Registry.API (LookupRequest, LookupResponse)
-import Kernel.Utils.Error (withFlowHandlerAPI)
+import Kernel.Utils.Error (withFlowHandlerAPI')
 import Storage.Queries.Subscriber as Sub
 
 lookup :: LookupRequest -> FlowHandler LookupResponse
-lookup req = withFlowHandlerAPI $ do
+lookup req = withFlowHandlerAPI' $ do
   findByAll req.unique_key_id req.subscriber_id req.domain req._type req.city
 
 create :: Subscriber -> FlowHandler AckResponse
-create sub = withFlowHandlerAPI $ do
+create sub = withFlowHandlerAPI' $ do
   runTransaction $ Sub.create sub
   return Ack
 
 delete :: Text -> Text -> FlowHandler AckResponse
-delete uniqueKeyId subscriberId = withFlowHandlerAPI $ do
+delete uniqueKeyId subscriberId = withFlowHandlerAPI' $ do
   runTransaction $ Sub.deleteByKey (uniqueKeyId, subscriberId)
   return Ack
