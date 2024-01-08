@@ -23,8 +23,8 @@ import Kernel.Types.Beckn.Domain as Context
 import Kernel.Types.Common
 import Storage.Tabular.Subscriber
 
-findByAll :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Context.Domain -> Maybe SubscriberType -> Maybe Context.City -> m [Subscriber]
-findByAll mbKeyId mbSubId mbDomain mbSubType mbCity =
+findByAll' :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Context.Domain -> Maybe SubscriberType -> m [Subscriber]
+findByAll' mbKeyId mbSubId mbDomain mbSubType =
   Esq.findAll $ do
     parkingLocation <- from $ table @SubscriberT
     where_ $
@@ -32,8 +32,15 @@ findByAll mbKeyId mbSubId mbDomain mbSubType mbCity =
         &&. whenJust_ mbSubId (\subId -> parkingLocation ^. SubscriberSubscriberId ==. val subId)
         &&. whenJust_ mbDomain (\domain -> parkingLocation ^. SubscriberDomain ==. val domain)
         &&. whenJust_ mbSubType (\subType -> parkingLocation ^. SubscriberSubscriberType ==. val subType)
-        &&. whenJust_ mbCity (\_ -> parkingLocation ^. SubscriberCity ==. val mbCity)
     return parkingLocation
+
+findByAll :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Context.Domain -> Maybe SubscriberType -> Maybe City -> m [Subscriber]
+findByAll mbKeyId mbSubId mbDomain mbSubType mbCity = do
+  subscribers <- findByAll' mbKeyId mbSubId mbDomain mbSubType
+  return (maybe subscribers (\city -> filterByCity subscribers city) mbCity)
+  where
+    filterByCity subscribers city =
+      filter (\subscriber -> elem city subscriber.city) subscribers
 
 create :: Subscriber -> SqlDB ()
 create = Esq.create

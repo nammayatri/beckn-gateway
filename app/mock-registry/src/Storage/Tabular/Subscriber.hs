@@ -40,7 +40,7 @@ mkPersist
       subscriberUrl Text
       subscriberType Domain.SubscriberType sql=type
       domain Context.Domain
-      city Context.City Maybe
+      city (PostgresList Context.City)
       country Context.Country Maybe
       signingPublicKey Base64
       encrPublicKey Base64 Maybe
@@ -72,6 +72,7 @@ instance FromTType SubscriberT Domain.Subscriber where
           valid_from = validFrom,
           valid_until = validUntil,
           _type = subscriberType,
+          city = unPostgresList city,
           ..
         }
 
@@ -86,5 +87,6 @@ instance ToTType SubscriberT Domain.Subscriber where
         validFrom = valid_from,
         validUntil = valid_until,
         subscriberType = _type,
+        city = PostgresList city,
         ..
       }
