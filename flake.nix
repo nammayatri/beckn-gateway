@@ -24,8 +24,14 @@
           autoWire = [ "packages" "checks" "apps" ];
         };
 
-        # FIX ME: confirm what the "process-compose" field needs to be
-        process-compose = { };
+        process-compose."run" = {
+          settings = {
+            processes = {
+              beckn-gateway.command = lib.getExe self'.packages.beckn-gateway;
+              mock-registry.command = lib.getExe self'.packages.mock-registry;
+            };
+          };
+        };
 
         packages.default = self'.packages.beckn-gateway;
 
