@@ -1,6 +1,6 @@
 # beckn-gateway
 
-See nammayatri's backend README for general instructions on Nix-based development.
+See [nammayatri's backend README](https://github.com/nammayatri/nammayatri/tree/main/Backend#getting-started) for general instructions on Nix-based development.
 
 ## Running
 
