@@ -85,6 +85,7 @@ library:
     - wai
     - warp
     - http-client
+    - hashmap
 
 executables:
   beckn-gateway-exe:

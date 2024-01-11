@@ -15,6 +15,8 @@
 module App.Types where
 
 import qualified Data.Cache as C
+import qualified Data.HashMap as HM
+import qualified Data.Map as M
 import qualified Data.Text as T
 import EulerHS.Prelude
 import qualified Kernel.Storage.Hedis as Redis
@@ -52,7 +54,8 @@ data AppCfg = AppCfg
     registryUrl :: BaseUrl,
     disableSignatureAuth :: Bool,
     enablePrometheusMetricLogging :: Bool,
-    enableRedisLatencyLogging :: Bool
+    enableRedisLatencyLogging :: Bool,
+    internalEndPointMap :: M.Map BaseUrl BaseUrl
   }
   deriving (Generic, FromDhall)
 
@@ -77,7 +80,8 @@ data AppEnv = AppEnv
     loggerEnv :: LoggerEnv,
     version :: DeploymentVersion,
     enablePrometheusMetricLogging :: Bool,
-    enableRedisLatencyLogging :: Bool
+    enableRedisLatencyLogging :: Bool,
+    internalEndPointHashMap :: HM.Map BaseUrl BaseUrl
   }
   deriving (Generic)
 
@@ -108,6 +112,7 @@ buildAppEnv AppCfg {..} = do
     if cutOffHedisCluster
       then pure hedisEnv
       else Redis.connectHedisCluster hedisClusterCfg modifierFunc
+  let internalEndPointHashMap = HM.fromList $ M.toList internalEndPointMap
   return $
     AppEnv
       { gwId = selfId,

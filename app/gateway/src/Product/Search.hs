@@ -45,6 +45,7 @@ search (SignatureAuthResult proxySign _) rawReq = withFlowHandlerBecknAPI' do
     let gatewaySearchSignAuth = ET.client ExternalAPI.searchAPI
         context = req.context
     providers <- BP.lookup context
+    internalEndPointHashMap <- asks (.internalEndPointHashMap)
     when (null providers) $ throwError NoProviders
     forM_ providers $ \provider -> fork "Provider search" . withLogTag "search_req" $ do
       let providerUrl = provider.subscriber_url
@@ -54,7 +55,7 @@ search (SignatureAuthResult proxySign _) rawReq = withFlowHandlerBecknAPI' do
           callBecknAPI'
             (Just $ ET.ManagerSelector signatureAuthManagerKey)
             Nothing
-            Nothing
+            (Just internalEndPointHashMap)
             providerUrl
             (gatewaySearchSignAuth (Just proxySign) rawReq)
             "search"
@@ -70,6 +71,7 @@ searchCb (SignatureAuthResult proxySign _subscriber) rawReq = withFlowHandlerBec
   withTransactionIdLogTag req . withLogTag "search_cb" $ do
     -- TODO: source providerUrl from _subscriber
     providerUrl <- req.context.bpp_uri & fromMaybeM (InvalidRequest "Missing context.bpp_uri")
+    internalEndPointHashMap <- asks (.internalEndPointHashMap)
     withLogTag ("providerUrl_" <> showBaseUrlText providerUrl) do
       let gatewayOnSearchSignAuth = ET.client ExternalAPI.onSearchAPI
       let bapUri = req.context.bap_uri
@@ -77,7 +79,7 @@ searchCb (SignatureAuthResult proxySign _subscriber) rawReq = withFlowHandlerBec
         callBecknAPI'
           (Just $ ET.ManagerSelector signatureAuthManagerKey)
           Nothing
-          Nothing
+          (Just internalEndPointHashMap)
           bapUri
           (gatewayOnSearchSignAuth (Just proxySign) rawReq)
           "on_search"

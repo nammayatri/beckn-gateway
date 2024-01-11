@@ -16,4 +16,5 @@ in  { autoMigrate = globalCommon.autoMigrate
     , registryUrl = mockRegistryUrl
     , shortDurationRetryCfg = globalCommon.shortDurationRetryCfg
     , longDurationRetryCfg = globalCommon.longDurationRetryCfg
+    , internalEndPointMap = globalCommon.internalEndPointMap
     }

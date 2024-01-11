@@ -37,4 +37,5 @@ in  { hedisCfg = rcfg
     , disableSignatureAuth = False
     , enablePrometheusMetricLogging = True
     , enableRedisLatencyLogging = True
+    , internalEndPointMap = common.internalEndPointMap
     }
