@@ -21,6 +21,7 @@ import Kernel.Storage.Esqueleto as Esq
 import Kernel.Types.Beckn.City as Context
 import Kernel.Types.Beckn.Domain as Context
 import Kernel.Types.Common
+import Kernel.Utils.Logging
 import Storage.Tabular.Subscriber
 
 findByAll' :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Context.Domain -> Maybe SubscriberType -> m [Subscriber]
@@ -37,6 +38,7 @@ findByAll' mbKeyId mbSubId mbDomain mbSubType =
 findByAll :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Context.Domain -> Maybe SubscriberType -> Maybe City -> m [Subscriber]
 findByAll mbKeyId mbSubId mbDomain mbSubType mbCity = do
   subscribers <- findByAll' mbKeyId mbSubId mbDomain mbSubType
+  logInfo ("FindByAll in registry before city result is :  " <> show subscribers)
   return (maybe subscribers (\city -> filterByCity subscribers city) mbCity)
   where
     filterByCity subscribers city =

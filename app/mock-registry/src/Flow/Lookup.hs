@@ -21,11 +21,14 @@ import Kernel.Storage.Esqueleto
 import Kernel.Types.Beckn.Ack
 import Kernel.Types.Registry.API (LookupRequest, LookupResponse)
 import Kernel.Utils.Error (withFlowHandlerAPI')
+import Kernel.Utils.Logging
 import Storage.Queries.Subscriber as Sub
 
 lookup :: LookupRequest -> FlowHandler LookupResponse
 lookup req = withFlowHandlerAPI' $ do
-  findByAll req.unique_key_id req.subscriber_id req.domain req._type req.city
+  subscribers <- findByAll req.unique_key_id req.subscriber_id req.domain req._type req.city
+  logInfo ("FindByAll in registry after city result is :  " <> show subscribers)
+  return subscribers
 
 create :: Subscriber -> FlowHandler AckResponse
 create sub = withFlowHandlerAPI' $ do
