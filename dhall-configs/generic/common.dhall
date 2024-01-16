@@ -15,8 +15,7 @@ let shortDurationRetryCfg = { maxRetries = +3, baseCoefficient = +2 }
 let longDurationRetryCfg = { maxRetries = +3, baseCoefficient = +4 }
 
 let internalEndPointMap =
-      [ { mapKey = "http://localhost:8016", mapValue = "http://localhost:8025" }
-      , { mapKey = "http://localhost:8015/v1"
+      [ { mapKey = "http://localhost:8015/v1"
         , mapValue = "http://localhost:8015/v1"
         }
       ]
