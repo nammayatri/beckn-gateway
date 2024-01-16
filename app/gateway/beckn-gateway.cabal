@@ -80,7 +80,6 @@ library
     , cache
     , containers
     , euler-hs
-    , hashmap
     , http-client
     , mobility-core
     , record-dot-preprocessor

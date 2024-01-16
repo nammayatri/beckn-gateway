@@ -15,8 +15,8 @@
 module App.Types where
 
 import qualified Data.Cache as C
-import qualified Data.HashMap as HM
-import qualified Data.Map as M
+import qualified Data.HashMap.Strict as HM
+import qualified Data.Map.Strict as M
 import qualified Data.Text as T
 import EulerHS.Prelude
 import qualified Kernel.Storage.Hedis as Redis
@@ -81,7 +81,7 @@ data AppEnv = AppEnv
     version :: DeploymentVersion,
     enablePrometheusMetricLogging :: Bool,
     enableRedisLatencyLogging :: Bool,
-    internalEndPointHashMap :: HM.Map BaseUrl BaseUrl
+    internalEndPointHashMap :: HM.HashMap BaseUrl BaseUrl
   }
   deriving (Generic)
 
