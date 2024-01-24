@@ -20,6 +20,7 @@ import EulerHS.Prelude
 import Kernel.Types.Beckn.City
 import Kernel.Types.Beckn.Country
 import Kernel.Types.Beckn.Domain
+import qualified Kernel.Utils.JSON as J
 import Servant.Client (BaseUrl)
 
 data Context = Context
@@ -27,6 +28,7 @@ data Context = Context
     bap_uri :: BaseUrl,
     bpp_uri :: Maybe BaseUrl,
     transaction_id :: Maybe Text,
+    location :: Location,
     city :: Maybe City,
     country :: Maybe Country
   }
@@ -34,3 +36,26 @@ data Context = Context
 
 instance ToJSON Context where
   toJSON = genericToJSON $ defaultOptions {omitNothingFields = True}
+
+data Location = Location
+  { city :: Maybe (Descriptor City),
+    country :: Maybe (Descriptor Country)
+  }
+  deriving (Generic, Show)
+
+instance ToJSON Location where
+  toJSON = genericToJSON removeNullFields'
+
+instance FromJSON Location where
+  parseJSON = genericParseJSON removeNullFields'
+
+newtype Descriptor a = Descriptor
+  { code :: a
+  }
+  deriving (Generic, FromJSON, ToJSON, Show)
+
+removeNullFields' :: Options
+removeNullFields' =
+  J.untaggedValue
+    { omitNothingFields = True
+    }
