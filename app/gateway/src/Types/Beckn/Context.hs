@@ -28,7 +28,7 @@ data Context = Context
     bap_uri :: BaseUrl,
     bpp_uri :: Maybe BaseUrl,
     transaction_id :: Maybe Text,
-    location :: Location,
+    location :: Maybe Location,
     city :: Maybe City,
     country :: Maybe Country
   }
