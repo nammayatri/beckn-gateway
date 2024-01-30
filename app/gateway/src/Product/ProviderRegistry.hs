@@ -36,9 +36,7 @@ lookup ::
   m [Registry.Subscriber]
 lookup context = do
   registryUrl <- asks (.registryUrl)
-  let city = case context.location.city of
-        Just (B.Descriptor code) -> Just code
-        Nothing -> context.city
+  let city = fromMaybe context.city $ context.location >>= \location -> fmap (\(B.Descriptor code) -> Just code) $ location.city
   Registry.registryFetch
     registryUrl
     Registry.emptyLookupRequest{_type = Just Registry.BPP,
