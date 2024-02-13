@@ -25,25 +25,34 @@ import EulerHS.Prelude
 import qualified EulerHS.Types as ET
 import Kernel.Types.Beckn.Ack
 import Kernel.Types.Error
+import qualified Kernel.Types.Registry.Subscriber as Subscriber
 import Kernel.Utils.Error.BaseError.HTTPError.BecknAPIError (callBecknAPI')
 import Kernel.Utils.Servant.BaseUrl
 import Kernel.Utils.Servant.Client
-import Kernel.Utils.Servant.SignatureAuth (SignatureAuthResult (..), signatureAuthManagerKey)
+import Kernel.Utils.Servant.SignatureAuth (SignatureAuthResult (..), authCheck, signatureAuthManagerKey)
 import qualified Product.ProviderRegistry as BP
 import qualified Types.API.Gateway.Search as ExternalAPI
-import Types.API.Search (OnSearchReq, SearchReq (..))
+import Types.API.Search (OnSearchReq, RawHeader (getRawHeader), SearchReq (..))
 import Types.Error
 import Utils.Common
 
 search ::
-  SignatureAuthResult ->
+  Maybe RawHeader ->
+  Maybe RawHeader ->
   ByteString ->
   FlowHandler AckResponse
-search (SignatureAuthResult proxySign _) rawReq = withFlowHandlerBecknAPI' do
+search mbSignPayloadHeader mbBodyHashHeader rawReq = withFlowHandlerBecknAPI' do
   req :: SearchReq <- rawReq & A.eitherDecodeStrict & fromEitherM (InvalidRequest . T.pack)
   withTransactionIdLogTag req $ do
     let gatewaySearchSignAuth = ET.client ExternalAPI.searchAPI
         context = req.context
+    (SignatureAuthResult proxySign _) <- withLogTag "gateway authCheck" $ do
+      let headerNameStr = "Authorization"
+          domain = req.context.domain
+          subscriberType = Subscriber.BAP
+      logDebug $ "SubscriberType: " <> show subscriberType <> "; domain: " <> show domain
+      -- FIXME merchantId not required for gateway
+      authCheck headerNameStr (getRawHeader <$> mbSignPayloadHeader) (getRawHeader <$> mbBodyHashHeader) "merchantId" subscriberType domain
     providers <- BP.lookup context
     internalEndPointHashMap <- asks (.internalEndPointHashMap)
     when (null providers) $ throwError NoProviders
@@ -63,12 +72,20 @@ search (SignatureAuthResult proxySign _) rawReq = withFlowHandlerBecknAPI' do
     return Ack
 
 searchCb ::
-  SignatureAuthResult ->
+  Maybe RawHeader ->
+  Maybe RawHeader ->
   ByteString ->
   FlowHandler AckResponse
-searchCb (SignatureAuthResult proxySign _subscriber) rawReq = withFlowHandlerBecknAPI' do
+searchCb mbSignPayloadHeader mbBodyHashHeader rawReq = withFlowHandlerBecknAPI' do
   req :: OnSearchReq <- rawReq & A.eitherDecodeStrict & fromEitherM (InvalidRequest . T.pack)
   withTransactionIdLogTag req . withLogTag "search_cb" $ do
+    (SignatureAuthResult proxySign _subscriber) <- withLogTag "gateway authCheck" $ do
+      let headerNameStr = "Authorization"
+          domain = req.context.domain
+          subscriberType = Subscriber.BPP
+      logDebug $ "SubscriberType: " <> show subscriberType <> "; domain: " <> show domain
+      -- FIXME merchantId not required for gateway
+      authCheck headerNameStr (getRawHeader <$> mbSignPayloadHeader) (getRawHeader <$> mbBodyHashHeader) "merchantId" subscriberType domain
     -- TODO: source providerUrl from _subscriber
     providerUrl <- req.context.bpp_uri & fromMaybeM (InvalidRequest "Missing context.bpp_uri")
     internalEndPointHashMap <- asks (.internalEndPointHashMap)
