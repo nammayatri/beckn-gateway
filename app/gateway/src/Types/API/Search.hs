@@ -19,14 +19,15 @@ module Types.API.Search
     SearchAPI,
     onSearchAPI,
     searchAPI,
+    RawHeader (getRawHeader),
   )
 where
 
 import Data.Aeson (Value)
+import qualified Data.Text.Encoding as DT
 import EulerHS.Prelude
 import Kernel.Types.Beckn.Ack
 import Kernel.Utils.Servant.JSONBS
-import Kernel.Utils.Servant.SignatureAuth
 import Servant hiding (Context)
 import Types.Beckn.API.Callback
 import Types.Beckn.Context
@@ -38,8 +39,17 @@ newtype SearchReq = SearchReq
 
 type OnSearchReq = CallbackReq Value
 
+newtype RawHeader = RawHeader {getRawHeader :: ByteString}
+
+instance FromHttpApiData RawHeader where
+  parseUrlPiece = parseHeader . DT.encodeUtf8
+  parseQueryParam = parseUrlPiece
+  parseHeader = Right . RawHeader
+
+-- These headers added by wai middleware
 type SearchAPI =
-  SignatureAuth "Authorization"
+  Header "Authorization" RawHeader
+    :> Header "Beckn-Body-Hash" RawHeader
     :> "search"
     :> ReqBody '[JSONBS] ByteString
     :> Post '[JSON] AckResponse
@@ -47,8 +57,10 @@ type SearchAPI =
 searchAPI :: Proxy SearchAPI
 searchAPI = Proxy
 
+-- These headers added by wai middleware
 type OnSearchAPI =
-  SignatureAuth "Authorization"
+  Header "Authorization" RawHeader
+    :> Header "Beckn-Body-Hash" RawHeader
     :> "on_search"
     :> ReqBody '[JSONBS] ByteString
     :> Post '[JSON] AckResponse
