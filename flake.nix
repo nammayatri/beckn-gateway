@@ -4,7 +4,7 @@
     nixpkgs.follows = "common/nixpkgs";
     haskell-flake.follows = "common/haskell-flake";
 
-    shared-kernel.url = "github:nammayatri/shared-kernel";
+    shared-kernel.url = "github:nammayatri/shared-kernel/Backend/feat/adding-prefix-to-redis-key";
   };
   outputs = inputs:
     inputs.common.lib.mkFlake { inherit inputs; } {

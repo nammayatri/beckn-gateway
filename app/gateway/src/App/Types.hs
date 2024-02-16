@@ -20,6 +20,7 @@ import qualified Data.Map.Strict as M
 import qualified Data.Text as T
 import EulerHS.Prelude
 import qualified Kernel.Storage.Hedis as Redis
+import Kernel.Storage.Hedis.AppPrefixes (addEnvPrefixToKey, environmentKey)
 import Kernel.Types.App
 import Kernel.Types.Cache
 import Kernel.Types.Common hiding (id)
@@ -31,7 +32,7 @@ import Kernel.Utils.IOLogging
 import qualified Kernel.Utils.Registry as Registry
 import Kernel.Utils.Servant.Client (HttpClientOptions, RetryCfg)
 import Kernel.Utils.Servant.SignatureAuth
-import System.Environment (lookupEnv)
+import System.Environment (lookupEnv, setEnv)
 import Tools.Metrics
 
 data AppCfg = AppCfg
@@ -55,6 +56,7 @@ data AppCfg = AppCfg
     disableSignatureAuth :: Bool,
     enablePrometheusMetricLogging :: Bool,
     enableRedisLatencyLogging :: Bool,
+    environment :: String,
     internalEndPointMap :: M.Map BaseUrl BaseUrl
   }
   deriving (Generic, FromDhall)
@@ -81,7 +83,8 @@ data AppEnv = AppEnv
     version :: DeploymentVersion,
     enablePrometheusMetricLogging :: Bool,
     enableRedisLatencyLogging :: Bool,
-    internalEndPointHashMap :: HM.HashMap BaseUrl BaseUrl
+    internalEndPointHashMap :: HM.HashMap BaseUrl BaseUrl,
+    environment :: String
   }
   deriving (Generic)
 
@@ -101,17 +104,17 @@ buildAppEnv AppCfg {..} = do
   isShuttingDown <- newEmptyTMVarIO
   coreMetrics <- registerCoreMetricsContainer
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
-  let modifierFunc = ("gateway:" <>)
-  hedisEnv <- Redis.connectHedis hedisCfg modifierFunc
-  hedisNonCriticalEnv <- Redis.connectHedis hedisNonCriticalCfg modifierFunc
+  setEnv environmentKey environment
+  hedisEnv <- Redis.connectHedis hedisCfg addEnvPrefixToKey
+  hedisNonCriticalEnv <- Redis.connectHedis hedisNonCriticalCfg addEnvPrefixToKey
   hedisNonCriticalClusterEnv <-
     if cutOffHedisCluster
       then pure hedisNonCriticalEnv
-      else Redis.connectHedisCluster hedisNonCriticalClusterCfg modifierFunc
+      else Redis.connectHedisCluster hedisNonCriticalClusterCfg addEnvPrefixToKey
   hedisClusterEnv <-
     if cutOffHedisCluster
       then pure hedisEnv
-      else Redis.connectHedisCluster hedisClusterCfg modifierFunc
+      else Redis.connectHedisCluster hedisClusterCfg addEnvPrefixToKey
   let internalEndPointHashMap = HM.fromList $ M.toList internalEndPointMap
   return $
     AppEnv
