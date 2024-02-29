@@ -26,6 +26,7 @@ where
 
 import EulerHS.Prelude
 import Kernel.Storage.Esqueleto.Config
+import Kernel.Streaming.Kafka.Producer.Types (KafkaProducerTools)
 import Kernel.Tools.Metrics.CoreMetrics (CoreMetricsContainer, DeploymentVersion, registerCoreMetricsContainer)
 import Kernel.Types.App
 import Kernel.Types.Common
@@ -34,6 +35,7 @@ import Kernel.Utils.App (getPodName, lookupDeploymentVersion)
 import Kernel.Utils.Dhall (FromDhall)
 import Kernel.Utils.IOLogging
 import Kernel.Utils.Shutdown
+import System.Environment (lookupEnv)
 
 data AppCfg = AppCfg
   { port :: Int,
@@ -53,7 +55,10 @@ data AppEnv = AppEnv
     coreMetrics :: CoreMetricsContainer,
     loggerEnv :: LoggerEnv,
     esqDBEnv :: EsqDBEnv,
-    version :: DeploymentVersion
+    version :: DeploymentVersion,
+    requestId :: Maybe Text,
+    shouldLogRequestId :: Bool,
+    kafkaProducerForART :: Maybe KafkaProducerTools
   }
   deriving (Generic)
 
@@ -63,6 +68,9 @@ buildAppEnv AppCfg {..} = do
   coreMetrics <- registerCoreMetricsContainer
   hostname <- getPodName
   version <- lookupDeploymentVersion
+  requestId <- pure Nothing
+  shouldLogRequestId <- fromMaybe False . (>>= readMaybe) <$> lookupEnv "SHOULD_LOG_REQUEST_ID"
+  let kafkaProducerForART = Nothing
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
   esqDBEnv <- prepareEsqDBEnv esqDBCfg loggerEnv
   return AppEnv {..}
