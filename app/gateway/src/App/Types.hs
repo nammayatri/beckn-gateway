@@ -20,6 +20,7 @@ import qualified Data.Map.Strict as M
 import qualified Data.Text as T
 import EulerHS.Prelude
 import qualified Kernel.Storage.Hedis as Redis
+import Kernel.Streaming.Kafka.Producer.Types
 import Kernel.Types.App
 import Kernel.Types.Cache
 import Kernel.Types.Common hiding (id)
@@ -81,7 +82,10 @@ data AppEnv = AppEnv
     version :: DeploymentVersion,
     enablePrometheusMetricLogging :: Bool,
     enableRedisLatencyLogging :: Bool,
-    internalEndPointHashMap :: HM.HashMap BaseUrl BaseUrl
+    internalEndPointHashMap :: HM.HashMap BaseUrl BaseUrl,
+    requestId :: Maybe Text,
+    shouldLogRequestId :: Bool,
+    kafkaProducerForART :: Maybe KafkaProducerTools
   }
   deriving (Generic)
 
@@ -101,6 +105,9 @@ buildAppEnv AppCfg {..} = do
   isShuttingDown <- newEmptyTMVarIO
   coreMetrics <- registerCoreMetricsContainer
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
+  requestId <- pure Nothing
+  shouldLogRequestId <- fromMaybe False . (>>= readMaybe) <$> lookupEnv "SHOULD_LOG_REQUEST_ID"
+  let kafkaProducerForART = Nothing
   let modifierFunc = ("gateway:" <>)
   hedisEnv <- Redis.connectHedis hedisCfg modifierFunc
   hedisNonCriticalEnv <- Redis.connectHedis hedisNonCriticalCfg modifierFunc
