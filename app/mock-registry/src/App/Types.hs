@@ -58,7 +58,8 @@ data AppEnv = AppEnv
     version :: DeploymentVersion,
     requestId :: Maybe Text,
     shouldLogRequestId :: Bool,
-    kafkaProducerForART :: Maybe KafkaProducerTools
+    kafkaProducerForART :: Maybe KafkaProducerTools,
+    isArtReplayerEnabled :: Bool
   }
   deriving (Generic)
 
@@ -71,6 +72,7 @@ buildAppEnv AppCfg {..} = do
   requestId <- pure Nothing
   shouldLogRequestId <- fromMaybe False . (>>= readMaybe) <$> lookupEnv "SHOULD_LOG_REQUEST_ID"
   let kafkaProducerForART = Nothing
+      isArtReplayerEnabled = False
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
   esqDBEnv <- prepareEsqDBEnv esqDBCfg loggerEnv
   return AppEnv {..}
