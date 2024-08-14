@@ -56,7 +56,8 @@ data AppCfg = AppCfg
     disableSignatureAuth :: Bool,
     enablePrometheusMetricLogging :: Bool,
     enableRedisLatencyLogging :: Bool,
-    internalEndPointMap :: M.Map BaseUrl BaseUrl
+    internalEndPointMap :: M.Map BaseUrl BaseUrl,
+    commonRedisPrefix :: Text
   }
   deriving (Generic, FromDhall)
 
@@ -109,16 +110,16 @@ buildAppEnv AppCfg {..} = do
   shouldLogRequestId <- fromMaybe False . (>>= readMaybe) <$> lookupEnv "SHOULD_LOG_REQUEST_ID"
   let kafkaProducerForART = Nothing
   let modifierFunc = ("gateway:" <>)
-  hedisEnv <- Redis.connectHedis hedisCfg modifierFunc
-  hedisNonCriticalEnv <- Redis.connectHedis hedisNonCriticalCfg modifierFunc
+  hedisEnv <- Redis.connectHedis hedisCfg modifierFunc commonRedisPrefix
+  hedisNonCriticalEnv <- Redis.connectHedis hedisNonCriticalCfg modifierFunc commonRedisPrefix
   hedisNonCriticalClusterEnv <-
     if cutOffHedisCluster
       then pure hedisNonCriticalEnv
-      else Redis.connectHedisCluster hedisNonCriticalClusterCfg modifierFunc
+      else Redis.connectHedisCluster hedisNonCriticalClusterCfg modifierFunc commonRedisPrefix
   hedisClusterEnv <-
     if cutOffHedisCluster
       then pure hedisEnv
-      else Redis.connectHedisCluster hedisClusterCfg modifierFunc
+      else Redis.connectHedisCluster hedisClusterCfg modifierFunc commonRedisPrefix
   let internalEndPointHashMap = HM.fromList $ M.toList internalEndPointMap
   return $
     AppEnv
