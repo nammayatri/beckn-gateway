@@ -52,6 +52,7 @@ default-extensions:
 
 dependencies:
   - base >= 4.7 && < 5
+  - aeson
   - euler-hs
   - record-hasfield
   - record-dot-preprocessor
@@ -85,6 +86,7 @@ library:
     - wai
     - warp
     - http-client
+    - mock-registry
 
 executables:
   beckn-gateway-exe:
