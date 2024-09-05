@@ -41,6 +41,9 @@ dependencies:
   - time
   - text
   - persistent
+  - servant-client
+  - openapi3
+  - aeson
 
 ghc-options:
   - -fwrite-ide-info

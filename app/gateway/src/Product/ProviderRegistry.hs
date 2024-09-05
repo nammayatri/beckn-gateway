@@ -17,29 +17,39 @@ module Product.ProviderRegistry
   )
 where
 
+import qualified "mock-registry" Domain.Lookup as Registry
 import EulerHS.Prelude
-import Kernel.Types.Common
-import Kernel.Types.Registry as Registry
-import qualified Kernel.Types.Registry.API as Registry
-import qualified Kernel.Utils.Registry as Registry
+import qualified EulerHS.Types as T
+import Kernel.Types.Error
+import Kernel.Utils.Common
 import Tools.Metrics
 import qualified Types.Beckn.Context as B
 
 lookup ::
   ( MonadReader r m,
     MonadFlow m,
-    Registry m,
     CoreMetrics m,
     HasField "registryUrl" r BaseUrl
   ) =>
   B.Context ->
-  m [Registry.Subscriber]
+  m Registry.LookupResponse
 lookup context = do
   registryUrl <- asks (.registryUrl)
   let city = fromMaybe context.city $ context.location >>= \location -> fmap (\(B.Descriptor code) -> Just code) $ location.city
-  Registry.registryFetch
+  registryFetch
     registryUrl
     Registry.emptyLookupRequest{_type = Just Registry.BPP,
                                 domain = Just context.domain,
                                 city = city
                                }
+
+registryFetch ::
+  ( MonadFlow m,
+    CoreMetrics m
+  ) =>
+  BaseUrl ->
+  Registry.LookupRequest ->
+  m Registry.LookupResponse
+registryFetch registryUrl request = do
+  callAPI registryUrl (T.client Registry.lookupAPI request) "lookup" Registry.lookupAPI
+    >>= fromEitherM (ExternalAPICallError (Just "REGISTRY_CALL_ERROR") registryUrl)

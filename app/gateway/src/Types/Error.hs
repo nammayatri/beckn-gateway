@@ -32,7 +32,7 @@ instanceExceptionWithParent 'HTTPException ''GatewayError
 instance IsBaseError GatewayError
 
 instance IsHTTPError GatewayError where
-  toErrorCode NoProviders = "CORE001"
+  toErrorCode NoProviders = "NO_PROVIDERS"
 
 instance IsBecknAPIError GatewayError where
   toType NoProviders = DOMAIN_ERROR

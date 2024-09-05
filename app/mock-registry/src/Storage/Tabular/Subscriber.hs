@@ -40,7 +40,7 @@ mkPersist
       subscriberUrl Text
       subscriberType Domain.SubscriberType sql=type
       domain Context.Domain
-      city (PostgresList Context.City)
+      city (PostgresList Text)
       country Context.Country Maybe
       signingPublicKey Base64
       encrPublicKey Base64 Maybe

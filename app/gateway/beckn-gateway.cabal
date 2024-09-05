@@ -82,6 +82,7 @@ library
     , euler-hs
     , http-client
     , mobility-core
+    , mock-registry
     , record-dot-preprocessor
     , record-hasfield
     , servant-client
@@ -134,7 +135,8 @@ executable beckn-gateway-exe
       UndecidableInstances
   ghc-options: -fwrite-ide-info -hiedir=.hie -Wall -Wcompat -Widentities -Wunused-imports -Werror -fplugin=RecordDotPreprocessor -Wwarn=ambiguous-fields -threaded -rtsopts "-with-rtsopts=-N -T" -Wincomplete-uni-patterns
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , beckn-gateway
     , euler-hs
     , record-dot-preprocessor

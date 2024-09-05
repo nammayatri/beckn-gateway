@@ -18,7 +18,6 @@ module Storage.Queries.Subscriber where
 import Domain.Subscriber
 import Kernel.Prelude
 import Kernel.Storage.Esqueleto as Esq
-import Kernel.Types.Beckn.City as Context
 import Kernel.Types.Beckn.Domain as Context
 import Kernel.Types.Common
 import Storage.Tabular.Subscriber
@@ -34,7 +33,7 @@ findByAll' mbKeyId mbSubId mbDomain mbSubType =
         &&. whenJust_ mbSubType (\subType -> parkingLocation ^. SubscriberSubscriberType ==. val subType)
     return parkingLocation
 
-findByAll :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Context.Domain -> Maybe SubscriberType -> Maybe City -> m [Subscriber]
+findByAll :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Context.Domain -> Maybe SubscriberType -> Maybe Text -> m [Subscriber]
 findByAll mbKeyId mbSubId mbDomain mbSubType mbCity = do
   subscribers <- findByAll' mbKeyId mbSubId mbDomain mbSubType
   return (maybe subscribers (\city -> filterByCity subscribers city) mbCity)
