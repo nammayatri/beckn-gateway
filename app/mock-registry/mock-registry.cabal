@@ -25,6 +25,7 @@ library
       App.Routes
       App.Server
       App.Types
+      Domain.Lookup
       Domain.Subscriber
       Flow.Lookup
       Storage.Queries.Subscriber
@@ -50,12 +51,15 @@ library
       TypeApplications
   ghc-options: -fwrite-ide-info -hiedir=.hie -fplugin=RecordDotPreprocessor -Wwarn=ambiguous-fields -Wall -Wcompat -Widentities -fhide-source-paths -Wno-unrecognised-pragmas -Werror -Wwarn=ambiguous-fields
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , euler-hs
     , mobility-core
+    , openapi3
     , persistent
     , record-dot-preprocessor
     , record-hasfield
+    , servant-client
     , servant-server
     , text
     , time
@@ -85,12 +89,15 @@ executable mock-registry-exe
       TypeApplications
   ghc-options: -fwrite-ide-info -hiedir=.hie -fplugin=RecordDotPreprocessor -Wwarn=ambiguous-fields -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , euler-hs
     , mock-registry
+    , openapi3
     , persistent
     , record-dot-preprocessor
     , record-hasfield
+    , servant-client
     , servant-server
     , text
     , time

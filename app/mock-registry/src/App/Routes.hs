@@ -15,12 +15,12 @@
 module App.Routes where
 
 import App.Types (FlowServer)
+import Domain.Lookup (LookupAPI)
 import Domain.Subscriber
 import EulerHS.Prelude
 import qualified Flow.Lookup as Flow
 import Kernel.Types.App (MandatoryQueryParam)
 import Kernel.Types.Beckn.Ack
-import Kernel.Types.Registry.Routes (LookupAPI)
 import Servant
 
 type RegistryAPI =

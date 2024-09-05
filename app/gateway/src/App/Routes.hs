@@ -34,7 +34,6 @@ type GatewayAPI' =
   "v1"
     :> ( Get '[JSON] Text
            :<|> SearchAPI
-           :<|> OnSearchAPI
        )
 
 type GatewayAPI = HealthAPI :<|> GatewayAPI'
@@ -54,4 +53,3 @@ gatewayHandler :: FlowServerR AppEnv GatewayAPI'
 gatewayHandler =
   pure "Gateway is UP"
     :<|> Search.search
-    :<|> Search.searchCb
