@@ -17,11 +17,13 @@ module Product.ProviderRegistry
   )
 where
 
+import qualified Data.Text as T
 import qualified "mock-registry" Domain.Lookup as Registry
 import EulerHS.Prelude
 import qualified EulerHS.Types as T
 import Kernel.Types.Error
 import Kernel.Utils.Common
+import Kernel.Utils.GenericPretty (prettyShowViaJSON)
 import Tools.Metrics
 import qualified Types.Beckn.Context as B
 
@@ -51,5 +53,6 @@ registryFetch ::
   Registry.LookupRequest ->
   m Registry.LookupResponse
 registryFetch registryUrl request = do
+  logDebug $ "Registry Lookup Request: " <> T.pack (prettyShowViaJSON request)
   callAPI registryUrl (T.client Registry.lookupAPI request) "lookup" Registry.lookupAPI
     >>= fromEitherM (ExternalAPICallError (Just "REGISTRY_CALL_ERROR") registryUrl)

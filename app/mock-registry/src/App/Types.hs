@@ -43,7 +43,8 @@ data AppCfg = AppCfg
     graceTerminationPeriod :: Seconds,
     loggerConfig :: LoggerConfig,
     autoMigrate :: Bool,
-    migrationPath :: Maybe FilePath
+    migrationPath :: Maybe FilePath,
+    internalAuthApiKey :: Text
   }
   deriving (Generic, FromDhall)
 
@@ -58,7 +59,8 @@ data AppEnv = AppEnv
     version :: DeploymentVersion,
     requestId :: Maybe Text,
     shouldLogRequestId :: Bool,
-    kafkaProducerForART :: Maybe KafkaProducerTools
+    kafkaProducerForART :: Maybe KafkaProducerTools,
+    internalAuthApiKey :: Text
   }
   deriving (Generic)
 
@@ -68,7 +70,7 @@ buildAppEnv AppCfg {..} = do
   coreMetrics <- registerCoreMetricsContainer
   hostname <- getPodName
   version <- lookupDeploymentVersion
-  requestId <- pure Nothing
+  let requestId = Nothing
   shouldLogRequestId <- fromMaybe False . (>>= readMaybe) <$> lookupEnv "SHOULD_LOG_REQUEST_ID"
   let kafkaProducerForART = Nothing
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
