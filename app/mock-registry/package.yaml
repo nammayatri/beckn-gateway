@@ -44,6 +44,8 @@ dependencies:
   - servant-client
   - openapi3
   - aeson
+  - regex-compat
+  - unordered-containers
 
 ghc-options:
   - -fwrite-ide-info

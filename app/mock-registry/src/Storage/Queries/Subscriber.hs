@@ -22,24 +22,35 @@ import Kernel.Types.Beckn.Domain as Context
 import Kernel.Types.Common
 import Storage.Tabular.Subscriber
 
-findByAll' :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Context.Domain -> Maybe SubscriberType -> m [Subscriber]
-findByAll' mbKeyId mbSubId mbDomain mbSubType =
+findAllBy' :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Context.Domain -> Maybe SubscriberType -> m [Subscriber]
+findAllBy' mbKeyId mbSubId mbDomain mbSubType =
   Esq.findAll $ do
-    parkingLocation <- from $ table @SubscriberT
+    subscriber <- from $ table @SubscriberT
     where_ $
-      whenJust_ mbKeyId (\keyId -> parkingLocation ^. SubscriberUniqueKeyId ==. val keyId)
-        &&. whenJust_ mbSubId (\subId -> parkingLocation ^. SubscriberSubscriberId ==. val subId)
-        &&. whenJust_ mbDomain (\domain -> parkingLocation ^. SubscriberDomain ==. val domain)
-        &&. whenJust_ mbSubType (\subType -> parkingLocation ^. SubscriberSubscriberType ==. val subType)
-    return parkingLocation
+      whenJust_ mbKeyId (\keyId -> subscriber ^. SubscriberUniqueKeyId ==. val keyId)
+        &&. whenJust_ mbSubId (\subId -> subscriber ^. SubscriberSubscriberId ==. val subId)
+        &&. whenJust_ mbDomain (\domain -> subscriber ^. SubscriberDomain ==. val domain)
+        &&. whenJust_ mbSubType (\subType -> subscriber ^. SubscriberSubscriberType ==. val subType)
+    return subscriber
 
-findByAll :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Context.Domain -> Maybe SubscriberType -> Maybe Text -> m [Subscriber]
-findByAll mbKeyId mbSubId mbDomain mbSubType mbCity = do
-  subscribers <- findByAll' mbKeyId mbSubId mbDomain mbSubType
-  return (maybe subscribers (\city -> filterByCity subscribers city) mbCity)
+findAllBy :: (MonadThrow m, Log m, Transactionable m) => Maybe Text -> Maybe Text -> Maybe Context.Domain -> Maybe SubscriberType -> Maybe Text -> m [Subscriber]
+findAllBy mbKeyId mbSubId mbDomain mbSubType mbCity = do
+  subscribers <- findAllBy' mbKeyId mbSubId mbDomain mbSubType
+  return (maybe subscribers (`filterByCity` subscribers) mbCity)
   where
-    filterByCity subscribers city =
-      filter (\subscriber -> elem city subscriber.city) subscribers
+    filterByCity city = filter (\subscriber -> elem city subscriber.city)
+
+updateCities :: Text -> Text -> Context.Domain -> SubscriberType -> [Text] -> SqlDB ()
+updateCities ukId subId domain subType cities = do
+  Esq.update $ \tbl -> do
+    set
+      tbl
+      [SubscriberCity =. val (PostgresList cities)]
+    where_ $
+      tbl ^. SubscriberUniqueKeyId ==. val ukId
+        &&. tbl ^. SubscriberSubscriberId ==. val subId
+        &&. tbl ^. SubscriberDomain ==. val domain
+        &&. tbl ^. SubscriberSubscriberType ==. val subType
 
 create :: Subscriber -> SqlDB ()
 create = Esq.create

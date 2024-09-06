@@ -17,8 +17,10 @@ module App.Routes where
 import App.Types (FlowServer)
 import Domain.Lookup (LookupAPI)
 import Domain.Subscriber
+import qualified Domain.Types.UpdateCities as UCT
 import EulerHS.Prelude
 import qualified Flow.Lookup as Flow
+import qualified Flow.UpdateCities as UC
 import Kernel.Types.App (MandatoryQueryParam)
 import Kernel.Types.Beckn.Ack
 import Servant
@@ -27,9 +29,10 @@ type RegistryAPI =
   LookupAPI
     :<|> CreateAPI
     :<|> DeleteAPI
+    :<|> UCT.UpdateCitiesAPI
 
 registryFlow :: FlowServer RegistryAPI
-registryFlow = lookupFlow :<|> Flow.create :<|> Flow.delete
+registryFlow = lookupFlow :<|> Flow.create :<|> Flow.delete :<|> UC.updateCities
 
 registryAPI :: Proxy RegistryAPI
 registryAPI = Proxy
