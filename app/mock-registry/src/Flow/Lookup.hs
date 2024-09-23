@@ -15,17 +15,17 @@
 module Flow.Lookup where
 
 import App.Types (FlowHandler)
+import Domain.Lookup (LookupRequest, LookupResponse)
 import Domain.Subscriber
 import Kernel.Prelude
 import Kernel.Storage.Esqueleto
 import Kernel.Types.Beckn.Ack
-import Kernel.Types.Registry.API (LookupRequest, LookupResponse)
 import Kernel.Utils.Error (withFlowHandlerAPI')
 import Storage.Queries.Subscriber as Sub
 
 lookup :: LookupRequest -> FlowHandler LookupResponse
 lookup req = withFlowHandlerAPI' $ do
-  findByAll req.unique_key_id req.subscriber_id req.domain req._type req.city
+  findAllBy req.unique_key_id req.subscriber_id req.domain req._type req.city
 
 create :: Subscriber -> FlowHandler AckResponse
 create sub = withFlowHandlerAPI' $ do

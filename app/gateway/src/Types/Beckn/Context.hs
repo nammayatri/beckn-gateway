@@ -17,7 +17,6 @@ module Types.Beckn.Context where
 import Data.Aeson
 import Data.Text
 import EulerHS.Prelude
-import Kernel.Types.Beckn.City
 import Kernel.Types.Beckn.Country
 import Kernel.Types.Beckn.Domain
 import qualified Kernel.Utils.JSON as J
@@ -29,7 +28,7 @@ data Context = Context
     bpp_uri :: Maybe BaseUrl,
     transaction_id :: Maybe Text,
     location :: Maybe Location,
-    city :: Maybe City,
+    city :: Maybe Text,
     country :: Maybe Country
   }
   deriving (Generic, FromJSON, Show)
@@ -38,7 +37,7 @@ instance ToJSON Context where
   toJSON = genericToJSON $ defaultOptions {omitNothingFields = True}
 
 data Location = Location
-  { city :: Maybe (Descriptor City),
+  { city :: Maybe (Descriptor Text),
     country :: Maybe (Descriptor Country)
   }
   deriving (Generic, Show)

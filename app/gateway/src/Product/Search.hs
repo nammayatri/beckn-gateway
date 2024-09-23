@@ -14,7 +14,6 @@
 
 module Product.Search
   ( search,
-    searchCb,
   )
 where
 
@@ -32,7 +31,7 @@ import Kernel.Utils.Servant.Client
 import Kernel.Utils.Servant.SignatureAuth (SignatureAuthResult (..), authCheck, signatureAuthManagerKey)
 import qualified Product.ProviderRegistry as BP
 import qualified Types.API.Gateway.Search as ExternalAPI
-import Types.API.Search (OnSearchReq, RawHeader (getRawHeader), SearchReq (..))
+import Types.API.Search (RawHeader (getRawHeader), SearchReq (..))
 import Types.Error
 import Utils.Common
 
@@ -70,35 +69,3 @@ search mbSignPayloadHeader mbBodyHashHeader rawReq = withFlowHandlerBecknAPI' do
             "search"
             ExternalAPI.searchAPI
     return Ack
-
-searchCb ::
-  Maybe RawHeader ->
-  Maybe RawHeader ->
-  ByteString ->
-  FlowHandler AckResponse
-searchCb mbSignPayloadHeader mbBodyHashHeader rawReq = withFlowHandlerBecknAPI' do
-  req :: OnSearchReq <- rawReq & A.eitherDecodeStrict & fromEitherM (InvalidRequest . T.pack)
-  withTransactionIdLogTag req . withLogTag "search_cb" $ do
-    (SignatureAuthResult proxySign _subscriber) <- withLogTag "gateway authCheck" $ do
-      let headerNameStr = "Authorization"
-          domain = req.context.domain
-          subscriberType = Subscriber.BPP
-      logDebug $ "SubscriberType: " <> show subscriberType <> "; domain: " <> show domain
-      -- FIXME merchantId not required for gateway
-      authCheck headerNameStr (getRawHeader <$> mbSignPayloadHeader) (getRawHeader <$> mbBodyHashHeader) "merchantId" subscriberType domain
-    -- TODO: source providerUrl from _subscriber
-    providerUrl <- req.context.bpp_uri & fromMaybeM (InvalidRequest "Missing context.bpp_uri")
-    internalEndPointHashMap <- asks (.internalEndPointHashMap)
-    withLogTag ("providerUrl_" <> showBaseUrlText providerUrl) do
-      let gatewayOnSearchSignAuth = ET.client ExternalAPI.onSearchAPI
-      let bapUri = req.context.bap_uri
-      void . withShortRetry $
-        callBecknAPI'
-          (Just $ ET.ManagerSelector signatureAuthManagerKey)
-          Nothing
-          (Just internalEndPointHashMap)
-          bapUri
-          (gatewayOnSearchSignAuth (Just proxySign) rawReq)
-          "on_search"
-          ExternalAPI.onSearchAPI
-      return Ack
