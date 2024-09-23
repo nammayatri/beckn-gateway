@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: x86_64-linux
     outputs:
-      image_name: ${{ steps.image_info.outputs.image_name }}
+      docker-image-name: ${{ steps.docker.outputs.image_name }}
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/cachix-action@v15
@@ -23,6 +23,7 @@ jobs:
         run: om ci
 
       - name: Docker tasks
+        id: docker
         if: github.ref == 'refs/heads/main'
         run: |
           nix build .#dockerImage -o docker-image.tgz
@@ -50,5 +51,5 @@ jobs:
         run: |
           echo "$GITHUB_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
           docker load < docker-image.tgz
-          docker push ${{ needs.build.outputs.image_name }}
+          docker push ${{ needs.build.outputs.docker-image-name }}
           docker logout ghcr.io
