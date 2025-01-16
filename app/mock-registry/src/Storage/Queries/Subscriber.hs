@@ -38,7 +38,10 @@ findAllBy mbKeyId mbSubId mbDomain mbSubType mbCity = do
   subscribers <- findAllBy' mbKeyId mbSubId mbDomain mbSubType
   return (maybe subscribers (`filterByCity` subscribers) mbCity)
   where
-    filterByCity city = filter (\subscriber -> elem city subscriber.city)
+    filterByCity city = filter (\subscriber -> elem city subscriber.city || elem allCities subscriber.city || city == allCities)
+
+    allCities :: Text
+    allCities = "*"
 
 updateCities :: Text -> Text -> Context.Domain -> SubscriberType -> [Text] -> SqlDB ()
 updateCities ukId subId domain subType cities = do
