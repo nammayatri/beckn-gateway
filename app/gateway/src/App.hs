@@ -23,7 +23,6 @@ import qualified Data.HashMap.Strict as HMS
 import qualified Data.Text as T
 import EulerHS.Prelude hiding (exitSuccess)
 import EulerHS.Runtime as E
-import qualified EulerHS.Runtime as R
 import qualified Kernel.Tools.Metrics.Init as Metrics
 import qualified Kernel.Types.App as App
 import Kernel.Types.Flow
@@ -59,15 +58,9 @@ runGateway configModifier = do
   E.withFlowRuntime (Just loggerRt) $ \flowRt -> do
     flowRt' <- runFlowR flowRt appEnv $ do
       withLogTag "Server startup" $ do
-        managers <-
-          prepareAuthManager
-            flowRt
-            appEnv
-            ["Proxy-Authorization", "X-Gateway-Authorization"]
-            appEnv.gwId
-            appCfg.authEntity.uniqueKeyId
-            & HMS.singleton signatureAuthManagerKey
-            & createManagers
+        let gatewayAuthManager = HMS.singleton (signatureAuthManagerKey) (prepareAuthManager flowRt appEnv ["Proxy-Authorization", "X-Gateway-Authorization"] appEnv.gwId appCfg.authEntity.uniqueKeyId)
+        let becknAuthManager = HMS.singleton (signatureAuthManagerKey <> (T.pack "-") <> appEnv.gwId) (prepareAuthManager flowRt appEnv ["Authorization"] appEnv.gwId appCfg.authEntity.uniqueKeyId)
+        flowRt' <- addAuthManagersToFlowRt flowRt [(Nothing, gatewayAuthManager), (Nothing, becknAuthManager)]
         logInfo ("Runtime created. Starting server at port " <> show port)
-        return $ flowRt {R._httpClientManagers = managers}
+        return flowRt'
     runSettings settings $ run (App.EnvR flowRt' appEnv)
