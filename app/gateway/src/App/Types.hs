@@ -82,10 +82,7 @@ data AppEnv = AppEnv
     version :: DeploymentVersion,
     enablePrometheusMetricLogging :: Bool,
     enableRedisLatencyLogging :: Bool,
-    internalEndPointHashMap :: HM.HashMap BaseUrl BaseUrl,
-    requestId :: Maybe Text,
-    shouldLogRequestId :: Bool,
-    kafkaProducerForART :: Maybe KafkaProducerTools
+    internalEndPointHashMap :: HM.HashMap BaseUrl BaseUrl
   }
   deriving (Generic)
 
@@ -105,9 +102,6 @@ buildAppEnv AppCfg {..} = do
   isShuttingDown <- newEmptyTMVarIO
   coreMetrics <- registerCoreMetricsContainer
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
-  requestId <- pure Nothing
-  shouldLogRequestId <- fromMaybe False . (>>= readMaybe) <$> lookupEnv "SHOULD_LOG_REQUEST_ID"
-  let kafkaProducerForART = Nothing
   let modifierFunc = ("gateway:" <>)
   hedisEnv <- Redis.connectHedis hedisCfg modifierFunc
   hedisNonCriticalEnv <- Redis.connectHedis hedisNonCriticalCfg modifierFunc
