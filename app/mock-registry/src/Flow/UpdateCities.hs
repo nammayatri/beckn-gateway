@@ -77,9 +77,9 @@ validateCities = \case
   [] -> Left "Cities cannot be empty"
   ["*"] -> Right ()
   cities -> do
-    let patternStr = "^std:[0-9]{2,8}$"
+    let patternStr = "^(std|area):[0-9]{2,8}$"
         invalidCities = filter (isNothing . matchRegex (mkRegex patternStr) . T.unpack) cities
     _ <- case invalidCities of
       [] -> Right ()
-      xs -> Left $ "cities " <> T.pack (show xs) <> " doesn't match the regex pattern:" <> T.pack patternStr
+      xs -> Left $ "cities " <> T.pack (show xs) <> " doesn't match the regex pattern:\'" <> T.pack patternStr <> "\'"
     bool (Right ()) (Left "Cities cannot have duplicates") $ hasDuplicates cities
