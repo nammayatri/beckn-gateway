@@ -75,6 +75,7 @@ updateCities _apiKey req = withFlowHandlerAPI' . withLogTag updateCitiesLogTag $
 validateCities :: [Text] -> Either Text ()
 validateCities = \case
   [] -> Left "Cities cannot be empty"
+  ["*"] -> Right ()
   cities -> do
     let patternStr = "^std:[0-9]{2,8}$"
         invalidCities = filter (isNothing . matchRegex (mkRegex patternStr) . T.unpack) cities
