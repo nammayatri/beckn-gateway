@@ -494,16 +494,15 @@
         "tinylog": "tinylog"
       },
       "locked": {
-        "lastModified": 1740461572,
-        "narHash": "sha256-kTcrUDW99AoGSPB8OxP4VKK/CJCWJRdT/4hncjnAS0s=",
+        "lastModified": 1741173147,
+        "narHash": "sha256-ksarQpBsANKu35mwK5iSvEZK9L7INyZlBelU39HkMZA=",
         "owner": "nammayatri",
         "repo": "euler-hs",
-        "rev": "9aabd552e31847cede4aea1a1b20cf26ec6f4f1b",
+        "rev": "1e5873dfe47eae540df4ffe975c8a1e17c27c423",
         "type": "github"
       },
       "original": {
         "owner": "nammayatri",
-        "ref": "backend/hedis-upgrade-for-zone-aware-replica-usage",
         "repo": "euler-hs",
         "type": "github"
       }
@@ -2569,11 +2568,11 @@
         "prometheus-haskell": "prometheus-haskell_2"
       },
       "locked": {
-        "lastModified": 1740745195,
-        "narHash": "sha256-Y6dtumQyeZtAODn+GtNV2OxRE0M0U0uGPzFwjf9hkB0=",
+        "lastModified": 1756129195,
+        "narHash": "sha256-uYytF3oCqoU1CrjdOMcyTozhI7G7DtdXkU9ydwrhpAw=",
         "owner": "nammayatri",
         "repo": "shared-kernel",
-        "rev": "27ce3da1f9b9426c3b5a1ad45a5f280a10229466",
+        "rev": "171bec2c2330f115abf3d493aeedf97864df83fe",
         "type": "github"
       },
       "original": {
