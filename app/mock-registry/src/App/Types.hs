@@ -60,7 +60,8 @@ data AppEnv = AppEnv
     requestId :: Maybe Text,
     shouldLogRequestId :: Bool,
     kafkaProducerForART :: Maybe KafkaProducerTools,
-    internalAuthApiKey :: Text
+    internalAuthApiKey :: Text,
+    url :: Maybe Text
   }
   deriving (Generic)
 
@@ -75,7 +76,7 @@ buildAppEnv AppCfg {..} = do
   let kafkaProducerForART = Nothing
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
   esqDBEnv <- prepareEsqDBEnv esqDBCfg loggerEnv
-  return AppEnv {..}
+  return AppEnv {url = Nothing, ..}
 
 releaseAppEnv :: AppEnv -> IO ()
 releaseAppEnv AppEnv {..} =
