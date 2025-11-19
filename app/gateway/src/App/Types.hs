@@ -87,7 +87,8 @@ data AppEnv = AppEnv
     shouldLogRequestId :: Bool,
     sessionId :: Maybe Text,
     kafkaProducerForART :: Maybe KafkaProducerTools,
-    url :: Maybe Text
+    url :: Maybe Text,
+    noSignatureSubscribers :: [Text]
   }
   deriving (Generic)
 
@@ -127,6 +128,7 @@ buildAppEnv AppCfg {..} = do
     AppEnv
       { gwId = selfId,
         url = Nothing,
+        noSignatureSubscribers = [],
         ..
       }
 
