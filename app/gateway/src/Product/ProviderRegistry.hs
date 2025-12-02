@@ -32,7 +32,8 @@ lookup ::
   ( MonadReader r m,
     MonadFlow m,
     CoreMetrics m,
-    HasField "registryUrl" r BaseUrl
+    HasField "registryUrl" r BaseUrl,
+    HasRequestId r
   ) =>
   B.Context ->
   m Registry.LookupResponse
