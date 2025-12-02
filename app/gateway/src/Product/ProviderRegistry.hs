@@ -24,6 +24,7 @@ import qualified EulerHS.Types as T
 import Kernel.Types.Error
 import Kernel.Utils.Common
 import Kernel.Utils.GenericPretty (prettyShowViaJSON)
+import Kernel.Utils.Servant.Client
 import Tools.Metrics
 import qualified Types.Beckn.Context as B
 
@@ -47,7 +48,9 @@ lookup context = do
 
 registryFetch ::
   ( MonadFlow m,
-    CoreMetrics m
+    CoreMetrics m,
+    HasRequestId r,
+    MonadReader r m
   ) =>
   BaseUrl ->
   Registry.LookupRequest ->
