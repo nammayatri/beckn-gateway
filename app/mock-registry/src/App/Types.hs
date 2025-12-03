@@ -59,6 +59,7 @@ data AppEnv = AppEnv
     version :: DeploymentVersion,
     requestId :: Maybe Text,
     shouldLogRequestId :: Bool,
+    sessionId :: Maybe Text,
     kafkaProducerForART :: Maybe KafkaProducerTools,
     internalAuthApiKey :: Text,
     url :: Maybe Text
@@ -72,6 +73,7 @@ buildAppEnv AppCfg {..} = do
   hostname <- getPodName
   version <- lookupDeploymentVersion
   let requestId = Nothing
+  let sessionId = Nothing
   shouldLogRequestId <- fromMaybe False . (>>= readMaybe) <$> lookupEnv "SHOULD_LOG_REQUEST_ID"
   let kafkaProducerForART = Nothing
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
