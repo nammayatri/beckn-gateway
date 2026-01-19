@@ -66,6 +66,7 @@ data AppEnv = AppEnv
     hedisNonCriticalEnv :: Redis.HedisEnv,
     hedisNonCriticalClusterEnv :: Redis.HedisEnv,
     hedisMigrationStage :: Bool,
+    secondaryHedisClusterEnv :: Maybe Redis.HedisEnv,
     cutOffHedisCluster :: Bool,
     hostName :: Text,
     authEntity :: AuthenticatingEntity',
@@ -124,6 +125,7 @@ buildAppEnv AppCfg {..} = do
       then pure hedisEnv
       else Redis.connectHedisCluster hedisClusterCfg modifierFunc
   let internalEndPointHashMap = HM.fromList $ M.toList internalEndPointMap
+  let secondaryHedisClusterEnv = Nothing
   return $
     AppEnv
       { gwId = selfId,
