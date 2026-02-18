@@ -62,7 +62,8 @@ data AppEnv = AppEnv
     sessionId :: Maybe Text,
     kafkaProducerForART :: Maybe KafkaProducerTools,
     internalAuthApiKey :: Text,
-    url :: Maybe Text
+    url :: Maybe Text,
+    txnId :: Maybe Text
   }
   deriving (Generic)
 
@@ -74,6 +75,7 @@ buildAppEnv AppCfg {..} = do
   version <- lookupDeploymentVersion
   let requestId = Nothing
   let sessionId = Nothing
+  let txnId = Nothing
   shouldLogRequestId <- fromMaybe False . (>>= readMaybe) <$> lookupEnv "SHOULD_LOG_REQUEST_ID"
   let kafkaProducerForART = Nothing
   loggerEnv <- prepareLoggerEnv loggerConfig hostname
