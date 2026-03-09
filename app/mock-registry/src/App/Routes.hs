@@ -25,14 +25,17 @@ import Kernel.Types.App (MandatoryQueryParam)
 import Kernel.Types.Beckn.Ack
 import Servant
 
+type HealthCheckAPI = Get '[JSON] Text
+
 type RegistryAPI =
-  LookupAPI
+  HealthCheckAPI
+    :<|> LookupAPI
     :<|> CreateAPI
     :<|> DeleteAPI
     :<|> UCT.UpdateCitiesAPI
 
 registryFlow :: FlowServer RegistryAPI
-registryFlow = lookupFlow :<|> Flow.create :<|> Flow.delete :<|> UC.updateCities
+registryFlow = pure "App is up" :<|> lookupFlow :<|> Flow.create :<|> Flow.delete :<|> UC.updateCities
 
 registryAPI :: Proxy RegistryAPI
 registryAPI = Proxy

@@ -21,14 +21,14 @@ import Kernel.Prelude
 import Kernel.Storage.Esqueleto.Migration
 import Kernel.Utils.App
 import Kernel.Utils.Dhall (readDhallConfigDefault)
-import Kernel.Utils.Servant.Server (runServerWithHealthCheck)
+import Kernel.Utils.Servant.Server (runServer)
 import Servant (Context (..))
 
 runRegistryService :: (AppCfg -> AppCfg) -> IO ()
 runRegistryService configModifier = do
   config <- readDhallConfigDefault "mock-registry" <&> configModifier
   appEnv <- buildAppEnv config
-  runServerWithHealthCheck appEnv registryAPI registryFlow middleware identity EmptyContext releaseAppEnv $ \flowRt -> do
+  runServer appEnv registryAPI registryFlow middleware identity EmptyContext (const identity) releaseAppEnv $ \flowRt -> do
     migrateIfNeeded (maybeToList config.migrationPath) config.autoMigrate config.esqDBCfg
       >>= handleLeft exitDBMigrationFailure "Couldn't migrate database: "
     return flowRt
