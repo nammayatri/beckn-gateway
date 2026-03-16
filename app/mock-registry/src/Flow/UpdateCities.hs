@@ -11,8 +11,6 @@
 
  the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 -}
-{-# LANGUAGE LambdaCase #-}
-
 module Flow.UpdateCities where
 
 import App.Types (FlowHandler)
@@ -24,7 +22,6 @@ import Domain.Types.UpdateCities
 import EulerHS.Prelude
 import Kernel.Storage.Esqueleto (runTransaction)
 import Kernel.Types.Beckn.Country
-import Kernel.Types.Common
 import Kernel.Types.Error (GenericError (InvalidRequest))
 import Kernel.Utils.Common
 import Kernel.Utils.GenericPretty (prettyShowViaJSON)

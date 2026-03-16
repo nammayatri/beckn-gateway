@@ -15,7 +15,6 @@
 module Types.Beckn.Context where
 
 import Data.Aeson
-import Data.Text
 import EulerHS.Prelude
 import Kernel.Types.Beckn.Country
 import Kernel.Types.Beckn.Domain
