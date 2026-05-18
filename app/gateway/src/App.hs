@@ -42,7 +42,8 @@ import Utils.Common
 
 runGateway :: (AppCfg -> AppCfg) -> IO ()
 runGateway configModifier = do
-  appCfg <- configModifier <$> readDhallConfigDefault "beckn-gateway"
+  appCfg' <- configModifier <$> readDhallConfigDefault "beckn-gateway"
+  appCfg <- overridePortFromEnv appCfg'
   let port = appCfg.port
   let metricsPort = appCfg.metricsPort
   Metrics.serve metricsPort
@@ -64,3 +65,10 @@ runGateway configModifier = do
         logInfo ("Runtime created. Starting server at port " <> show port)
         return flowRt'
     runSettings settings $ run (App.EnvR flowRt' appEnv)
+
+overridePortFromEnv :: AppCfg -> IO AppCfg
+overridePortFromEnv cfg = do
+  mbPort <- lookupEnv "SERVICE_PORT"
+  pure $ case mbPort >>= readMaybe of
+    Just p -> cfg {port = p}
+    Nothing -> cfg
