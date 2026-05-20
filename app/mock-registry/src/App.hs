@@ -23,16 +23,11 @@ import Kernel.Utils.App
 import Kernel.Utils.Dhall (readDhallConfigDefault)
 import Kernel.Utils.Servant.Server (runServer)
 import Servant (Context (..))
-import System.Environment (lookupEnv)
 
 runRegistryService :: (AppCfg -> AppCfg) -> IO ()
 runRegistryService configModifier = do
   config <- readDhallConfigDefault "mock-registry" <&> configModifier
-  appEnv' <- buildAppEnv config
-  mbPort <- lookupEnv "SERVICE_PORT"
-  let appEnv = case mbPort >>= readMaybe of
-        Just p -> appEnv' {port = p}
-        Nothing -> appEnv'
+  appEnv <- buildAppEnv config
   runServer appEnv registryAPI registryFlow middleware identity EmptyContext (const identity) releaseAppEnv $ \flowRt -> do
     migrateIfNeeded (maybeToList config.migrationPath) config.autoMigrate config.esqDBCfg
       >>= handleLeft exitDBMigrationFailure "Couldn't migrate database: "
