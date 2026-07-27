@@ -22,6 +22,7 @@ module Domain.Lookup
   )
 where
 
+import Data.Aeson (withObject, (.:?))
 import Data.OpenApi (ToSchema)
 import Domain.Subscriber (Subscriber)
 import EulerHS.Prelude
@@ -52,8 +53,18 @@ data LookupRequest = LookupRequest
 emptyLookupRequest :: LookupRequest
 emptyLookupRequest = LookupRequest Nothing Nothing Nothing Nothing Nothing Nothing
 
+-- | Parses @unique_key_id@ from either the @ukId@ or the @unique_key_id@ JSON key
+-- (preferring @ukId@ when both are present). All other fields follow the
+-- generic 'stripPrefixUnderscoreIfAny' convention (e.g. @_type@ maps to @type@).
 instance FromJSON LookupRequest where
-  parseJSON = genericParseJSON stripPrefixUnderscoreIfAny
+  parseJSON = withObject "LookupRequest" $ \obj -> do
+    unique_key_id <- obj .:? "ukId" >>= maybe (obj .:? "unique_key_id") (pure . Just)
+    subscriber_id <- obj .:? "subscriber_id"
+    _type <- obj .:? "type"
+    domain <- obj .:? "domain"
+    country <- obj .:? "country"
+    city <- obj .:? "city"
+    pure LookupRequest {..}
 
 instance ToJSON LookupRequest where
   toJSON = genericToJSON stripPrefixUnderscoreIfAny
