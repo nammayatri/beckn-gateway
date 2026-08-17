@@ -5,13 +5,16 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
+    types: [labeled]
+
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: x86_64-linux
+    if: ${{ github.event.label.name == 'backend' }}
     outputs:
-      docker-image-name: ${{ steps.docker.outputs.image_name }}
+      image_name: ${{ steps.image_info.outputs.image_name }}
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/cachix-action@v15
