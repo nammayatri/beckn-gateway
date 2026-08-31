@@ -62,7 +62,6 @@ library:
     - -fhide-source-paths
     - -Wno-unrecognised-pragmas
     - -Werror
-    - -Wwarn=ambiguous-fields
   dependencies:
     - mobility-core
 

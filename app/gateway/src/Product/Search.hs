@@ -22,12 +22,9 @@ import qualified Data.Aeson as A
 import qualified Data.Text as T
 import EulerHS.Prelude
 import qualified EulerHS.Types as ET
-import Kernel.Types.Beckn.Ack
-import Kernel.Types.Error
 import qualified Kernel.Types.Registry.Subscriber as Subscriber
 import Kernel.Utils.Error.BaseError.HTTPError.BecknAPIError (callBecknAPI')
 import Kernel.Utils.Servant.BaseUrl
-import Kernel.Utils.Servant.Client
 import Kernel.Utils.Servant.SignatureAuth (SignatureAuthResult (..), authCheck, signatureAuthManagerKey)
 import qualified Product.ProviderRegistry as BP
 import qualified Types.API.Gateway.Search as ExternalAPI

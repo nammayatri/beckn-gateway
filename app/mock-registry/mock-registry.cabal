@@ -51,7 +51,7 @@ library
       RecordWildCards
       OverloadedStrings
       TypeApplications
-  ghc-options: -fwrite-ide-info -hiedir=.hie -fplugin=RecordDotPreprocessor -Wwarn=ambiguous-fields -Wall -Wcompat -Widentities -fhide-source-paths -Wno-unrecognised-pragmas -Werror -Wwarn=ambiguous-fields
+  ghc-options: -fwrite-ide-info -hiedir=.hie -fplugin=RecordDotPreprocessor -Wwarn=ambiguous-fields -Wall -Wcompat -Widentities -fhide-source-paths -Wno-unrecognised-pragmas -Werror
   build-depends:
       aeson
     , base >=4.7 && <5

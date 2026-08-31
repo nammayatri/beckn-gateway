@@ -11,11 +11,11 @@
 
  the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 -}
+{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
 
 module Types.Beckn.Context where
 
 import Data.Aeson
-import Data.Text
 import EulerHS.Prelude
 import Kernel.Types.Beckn.Country
 import Kernel.Types.Beckn.Domain
