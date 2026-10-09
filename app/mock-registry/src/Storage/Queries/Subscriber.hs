@@ -55,8 +55,10 @@ updateCities ukId subId domain subType cities = do
         &&. tbl ^. SubscriberDomain ==. val domain
         &&. tbl ^. SubscriberSubscriberType ==. val subType
 
+-- | Inserts only if no row exists for (unique_key_id, subscriber_id); silently
+-- skips an existing one instead of throwing on the unique-constraint conflict.
 create :: Subscriber -> SqlDB ()
-create = Esq.create
+create sub = void $ Esq.createUnique @SubscriberT sub
 
 deleteByKey :: (Text, Text) -> SqlDB ()
 deleteByKey = Esq.deleteByKey @SubscriberT
