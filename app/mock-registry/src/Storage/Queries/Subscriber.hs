@@ -55,8 +55,10 @@ updateCities ukId subId domain subType cities = do
         &&. tbl ^. SubscriberDomain ==. val domain
         &&. tbl ^. SubscriberSubscriberType ==. val subType
 
+-- | Upserts by (unique_key_id, subscriber_id) instead of insert-only, so a
+-- stale existing row gets corrected rather than silently skipped.
 create :: Subscriber -> SqlDB ()
-create = Esq.create
+create sub = Esq.repsert (sub.unique_key_id, sub.subscriber_id) sub
 
 deleteByKey :: (Text, Text) -> SqlDB ()
 deleteByKey = Esq.deleteByKey @SubscriberT
