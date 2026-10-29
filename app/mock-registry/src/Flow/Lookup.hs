@@ -14,8 +14,8 @@
 
 module Flow.Lookup where
 
-import App.Types (FlowHandler)
-import Domain.Lookup (LookupRequest, LookupResponse)
+import App.Types (AppEnv (..), FlowHandler)
+import Domain.Lookup (LookupRequest (..), LookupResponse)
 import Domain.Subscriber
 import Kernel.Prelude
 import Kernel.Storage.Esqueleto

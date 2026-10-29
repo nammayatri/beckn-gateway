@@ -11,6 +11,7 @@
 
  the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 -}
+{-# OPTIONS_GHC -Wwarn=ambiguous-fields #-}
 
 module App where
 
@@ -31,7 +32,7 @@ runRegistryService configModifier = do
   appEnv' <- buildAppEnv config
   mbPort <- lookupEnv "SERVICE_PORT"
   let appEnv = case mbPort >>= readMaybe of
-        Just p -> appEnv' {port = p}
+        Just p -> (appEnv' :: AppEnv) {port = p}
         Nothing -> appEnv'
   runServer appEnv registryAPI registryFlow middleware identity EmptyContext (const identity) releaseAppEnv $ \flowRt -> do
     migrateIfNeeded (maybeToList config.migrationPath) config.autoMigrate config.esqDBCfg

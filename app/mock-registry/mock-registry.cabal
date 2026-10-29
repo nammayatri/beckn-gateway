@@ -51,7 +51,8 @@ library
       RecordWildCards
       OverloadedStrings
       TypeApplications
-  ghc-options: -fwrite-ide-info -hiedir=.hie -fplugin=RecordDotPreprocessor -Wwarn=ambiguous-fields -Wall -Wcompat -Widentities -fhide-source-paths -Wno-unrecognised-pragmas -Werror -Wwarn=ambiguous-fields
+      OverloadedRecordDot
+  ghc-options: -fwrite-ide-info -hiedir=.hie -Wwarn=ambiguous-fields -Wall -Wcompat -Widentities -fhide-source-paths -Wno-unrecognised-pragmas -Werror -Wwarn=ambiguous-fields
   build-depends:
       aeson
     , base >=4.7 && <5
@@ -59,8 +60,6 @@ library
     , mobility-core
     , openapi3
     , persistent
-    , record-dot-preprocessor
-    , record-hasfield
     , regex-compat
     , servant-client
     , servant-server
@@ -91,7 +90,8 @@ executable mock-registry-exe
       RecordWildCards
       OverloadedStrings
       TypeApplications
-  ghc-options: -fwrite-ide-info -hiedir=.hie -fplugin=RecordDotPreprocessor -Wwarn=ambiguous-fields -threaded -rtsopts -with-rtsopts=-N
+      OverloadedRecordDot
+  ghc-options: -fwrite-ide-info -hiedir=.hie -Wwarn=ambiguous-fields -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aeson
     , base >=4.7 && <5
@@ -99,8 +99,6 @@ executable mock-registry-exe
     , mock-registry
     , openapi3
     , persistent
-    , record-dot-preprocessor
-    , record-hasfield
     , regex-compat
     , servant-client
     , servant-server
