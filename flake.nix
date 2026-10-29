@@ -22,11 +22,6 @@
             inherit (self'.packages) arion;
           };
           autoWire = [ "packages" "checks" "apps" ];
-          settings = {
-            shared-kernel = {
-              check = false;
-            };
-          };
         };
 
         # FIX ME: confirm what the "process-compose" field needs to be
