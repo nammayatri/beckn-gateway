@@ -20,6 +20,7 @@ where
 import App.Types
 import qualified Data.Aeson as A
 import qualified Data.Text as T
+import qualified Domain.Subscriber as Fields
 import EulerHS.Prelude
 import qualified EulerHS.Types as ET
 import Kernel.Types.Beckn.Ack
@@ -32,6 +33,7 @@ import Kernel.Utils.Servant.SignatureAuth (SignatureAuthResult (..), authCheck, 
 import qualified Product.ProviderRegistry as BP
 import qualified Types.API.Gateway.Search as ExternalAPI
 import Types.API.Search (RawHeader (getRawHeader), SearchReq (..))
+import qualified Types.Beckn.Context as Fields
 import Types.Error
 import Utils.Common
 
