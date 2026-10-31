@@ -41,9 +41,9 @@ lookup context = do
   let city = fromMaybe context.city $ context.location >>= \location -> fmap (\(B.Descriptor code) -> Just code) $ location.city
   registryFetch
     registryUrl
-    Registry.emptyLookupRequest{_type = Just Registry.BPP,
-                                domain = Just context.domain,
-                                city = city
+    Registry.emptyLookupRequest{Registry._type = Just Registry.BPP,
+                                Registry.domain = Just context.domain,
+                                Registry.city = city
                                }
 
 registryFetch ::

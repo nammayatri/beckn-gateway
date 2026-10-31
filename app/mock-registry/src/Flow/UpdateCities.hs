@@ -15,11 +15,12 @@
 
 module Flow.UpdateCities where
 
-import App.Types (FlowHandler)
+import App.Types (AppEnv (..), FlowHandler)
 import qualified Data.Aeson as Aeson
 import qualified Data.HashSet as Set
 import Data.List ((\\))
 import qualified Data.Text as T
+import qualified Domain.Subscriber as Fields
 import Domain.Types.UpdateCities
 import EulerHS.Prelude
 import Kernel.Storage.Esqueleto (runTransaction)

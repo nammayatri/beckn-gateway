@@ -49,13 +49,12 @@ default-extensions:
   - BlockArguments
   - TypeSynonymInstances
   - UndecidableInstances
+  - OverloadedRecordDot
 
 dependencies:
   - base >= 4.7 && < 5
   - aeson
   - euler-hs
-  - record-hasfield
-  - record-dot-preprocessor
   - unordered-containers
 
 ghc-options:
@@ -66,7 +65,6 @@ ghc-options:
   - -Widentities
   - -Wunused-imports
   - -Werror
-  - -fplugin=RecordDotPreprocessor
   - -Wwarn=ambiguous-fields
 
 library:
