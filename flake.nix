@@ -1,10 +1,10 @@
 {
   inputs = {
-    common.url = "github:nammayatri/common";
+    common.url = "github:nammayatri/common?ref=ghc-98-upgrade";
     nixpkgs.follows = "common/nixpkgs";
     haskell-flake.follows = "common/haskell-flake";
 
-    shared-kernel.url = "github:nammayatri/shared-kernel";
+    shared-kernel.url = "github:nammayatri/shared-kernel?ref=ghc-98-upgrade";
   };
   outputs = inputs:
     inputs.common.lib.mkFlake { inherit inputs; } {
@@ -22,6 +22,11 @@
             inherit (self'.packages) arion;
           };
           autoWire = [ "packages" "checks" "apps" ];
+          settings = {
+            shared-kernel = {
+              check = false;
+            };
+          };
         };
 
         # FIX ME: confirm what the "process-compose" field needs to be
