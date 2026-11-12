@@ -30,12 +30,11 @@ default-extensions:
   - RecordWildCards
   - OverloadedStrings
   - TypeApplications
+  - OverloadedRecordDot
 
 dependencies:
   - base >= 4.7 && < 5
   - euler-hs
-  - record-hasfield
-  - record-dot-preprocessor
   - servant-server
   - warp
   - time
@@ -50,7 +49,6 @@ dependencies:
 ghc-options:
   - -fwrite-ide-info
   - -hiedir=.hie
-  - -fplugin=RecordDotPreprocessor
   - -Wwarn=ambiguous-fields
 
 library:
