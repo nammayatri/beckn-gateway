@@ -1,29 +1,34 @@
 {
   "nodes": {
+    "amazonka-git": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1690490235,
+        "narHash": "sha256-ml7tGa+hCVbhBWaGDUOVM67Mh+F8R5WU7cLdcMqdVkw=",
+        "owner": "brendanhay",
+        "repo": "amazonka",
+        "rev": "e081929d5a81f30397c9c9a219b154da1a922fb8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "brendanhay",
+        "ref": "2.0.0",
+        "repo": "amazonka",
+        "type": "github"
+      }
+    },
     "beam": {
       "inputs": {
         "flake-parts": "flake-parts_8",
-        "haskell-flake": [
-          "shared-kernel",
-          "euler-hs",
-          "sequelize",
-          "beam-mysql",
-          "haskell-flake"
-        ],
-        "nixpkgs": [
-          "shared-kernel",
-          "euler-hs",
-          "sequelize",
-          "beam-mysql",
-          "nixpkgs"
-        ]
+        "haskell-flake": "haskell-flake_4",
+        "nixpkgs": "nixpkgs_22"
       },
       "locked": {
-        "lastModified": 1693307537,
-        "narHash": "sha256-BIq3ZjZQWQ0w3zWA19zGBggiVVfnOzR5d4b7De0oVZY=",
-        "owner": "arjunkathuria",
+        "lastModified": 1793106591,
+        "narHash": "sha256-lWwx/MXi9K+x28BIntQ58WFHNL1XH9ph+bGRl046J3I=",
+        "owner": "nammayatri",
         "repo": "beam",
-        "rev": "06bcc50997fdcfb87125bed252e888e5dd1e6d9c",
+        "rev": "822163a5ca22b83e757ce40c8f7b89cd1bc19380",
         "type": "github"
       },
       "original": {
@@ -479,6 +484,12 @@
           "common",
           "flake-parts"
         ],
+        "flake-root": [
+          "shared-kernel",
+          "euler-hs",
+          "common",
+          "flake-root"
+        ],
         "haskell-flake": [
           "shared-kernel",
           "haskell-flake"
@@ -489,21 +500,34 @@
           "shared-kernel",
           "nixpkgs"
         ],
+        "nixpkgs-140774-workaround": "nixpkgs-140774-workaround_4",
+        "nixpkgs-21_11": "nixpkgs-21_11_4",
+        "pre-commit-hooks-nix": [
+          "shared-kernel",
+          "euler-hs",
+          "common",
+          "pre-commit-hooks-nix"
+        ],
         "sequelize": "sequelize",
         "servant-mock": "servant-mock",
-        "tinylog": "tinylog"
+        "tinylog": "tinylog",
+        "treefmt-nix": [
+          "shared-kernel",
+          "euler-hs",
+          "common",
+          "treefmt-nix"
+        ]
       },
       "locked": {
-        "lastModified": 1771323784,
-        "narHash": "sha256-E/jm4Yyqw8gp9xVDxv+LA30urkwmxT/4PfIUJkaCfZI=",
+        "lastModified": 1794493301,
+        "narHash": "sha256-VtlAflx1NaOa8hK8gyzKASL+k+K8/82kYe+XNgGaObM=",
         "owner": "nammayatri",
         "repo": "euler-hs",
-        "rev": "47ff7bdae0f39f3889fdfb76b42af5041ccc5dff",
+        "rev": "c4e1a3f9f8f07f7600add352317625a78ee02232",
         "type": "github"
       },
       "original": {
         "owner": "nammayatri",
-        "ref": "backend/multi-cloud-setup-euler",
         "repo": "euler-hs",
         "type": "github"
       }
@@ -1123,14 +1147,29 @@
         "type": "github"
       }
     },
+    "haskell-flake_4": {
+      "locked": {
+        "lastModified": 1692741689,
+        "narHash": "sha256-CbNpheNJMTM9Wz5iTzdXmMtvfH9KvH/jNfv6N9roaqs=",
+        "owner": "srid",
+        "repo": "haskell-flake",
+        "rev": "c8622c8a259e18e0a1919462ce885380108a723c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "repo": "haskell-flake",
+        "type": "github"
+      }
+    },
     "hedis": {
       "flake": false,
       "locked": {
-        "lastModified": 1740460297,
-        "narHash": "sha256-4FjUqrP+63Te39UM9PctBS8cuJUiJYkZ3zIJ2IPeTA8=",
+        "lastModified": 1793964969,
+        "narHash": "sha256-1S4N/r1sG3Pq6l8d6VhHWjFG7glWnEwzU0rk2Iur4uk=",
         "owner": "nammayatri",
         "repo": "hedis",
-        "rev": "089d22be67103f613bd1eecbac8c2e6d6d0576c6",
+        "rev": "b7a300b0e0b481784929fc1628f7c7647bf5266c",
         "type": "github"
       },
       "original": {
@@ -1448,6 +1487,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-140774-workaround_4": {
+      "locked": {
+        "lastModified": 1681394207,
+        "narHash": "sha256-hk9RUPnChwKjCtm/YzixAak5wIzIw+b1avp7I3vg3dQ=",
+        "owner": "srid",
+        "repo": "nixpkgs-140774-workaround",
+        "rev": "a3c6d0622758e5d3da3d63100547f400ce6cb376",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "repo": "nixpkgs-140774-workaround",
+        "type": "github"
+      }
+    },
     "nixpkgs-21_11": {
       "locked": {
         "lastModified": 1659446231,
@@ -1481,6 +1535,22 @@
       }
     },
     "nixpkgs-21_11_3": {
+      "locked": {
+        "lastModified": 1659446231,
+        "narHash": "sha256-hekabNdTdgR/iLsgce5TGWmfIDZ86qjPhxDg/8TlzhE=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "eabc38219184cc3e04a974fe31857d8e0eac098d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-21.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-21_11_4": {
       "locked": {
         "lastModified": 1659446231,
         "narHash": "sha256-hekabNdTdgR/iLsgce5TGWmfIDZ86qjPhxDg/8TlzhE=",
@@ -2026,6 +2096,22 @@
     },
     "nixpkgs_22": {
       "locked": {
+        "lastModified": 1693145325,
+        "narHash": "sha256-Gat9xskErH1zOcLjYMhSDBo0JTBZKfGS0xJlIRnj6Rc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "cddebdb60de376c1bdb7a4e6ee3d98355453fe56",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_23": {
+      "locked": {
         "lastModified": 1683657389,
         "narHash": "sha256-jx91UqqoBneE8QPAKJA29GANrU/Z7ULghoa/JE0+Edw=",
         "owner": "nixos",
@@ -2405,7 +2491,7 @@
           "common",
           "haskell-flake"
         ],
-        "nixpkgs": "nixpkgs_22"
+        "nixpkgs": "nixpkgs_23"
       },
       "locked": {
         "lastModified": 1687373886,
@@ -2552,6 +2638,7 @@
     },
     "shared-kernel": {
       "inputs": {
+        "amazonka-git": "amazonka-git",
         "clickhouse-haskell": "clickhouse-haskell",
         "common": "common_2",
         "euler-hs": "euler-hs",
@@ -2569,11 +2656,11 @@
         "prometheus-haskell": "prometheus-haskell_2"
       },
       "locked": {
-        "lastModified": 1773067718,
-        "narHash": "sha256-fZdjBd+aVxwgrg4NMyZPaPpqy7UOwy7aZJJ2RlNLBeY=",
+        "lastModified": 1794559680,
+        "narHash": "sha256-jobc0klgFI3/VrxTFw+af+u8BZzW35vytU91b3F/IMQ=",
         "owner": "nammayatri",
         "repo": "shared-kernel",
-        "rev": "9c6c5e54349664c9367db6dc348d357546069381",
+        "rev": "115632a97b98cbab1a23fe8f8c471186eeed8124",
         "type": "github"
       },
       "original": {
