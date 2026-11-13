@@ -26,6 +26,7 @@ import Kernel.Types.Cache
 import Kernel.Types.Common hiding (id)
 import Kernel.Types.Flow
 import Kernel.Types.Registry
+import Kernel.Types.Version (CloudType)
 import Kernel.Utils.App (lookupDeploymentVersion)
 import Kernel.Utils.Dhall (FromDhall)
 import Kernel.Utils.IOLogging
@@ -66,7 +67,7 @@ data AppEnv = AppEnv
     hedisNonCriticalEnv :: Redis.HedisEnv,
     hedisNonCriticalClusterEnv :: Redis.HedisEnv,
     hedisMigrationStage :: Bool,
-    secondaryHedisClusterEnv :: Maybe Redis.HedisEnv,
+    peerHedisClusterEnvs :: [(CloudType, Redis.HedisEnv)],
     cutOffHedisCluster :: Bool,
     hostName :: Text,
     authEntity :: AuthenticatingEntity',
@@ -125,7 +126,7 @@ buildAppEnv AppCfg {..} = do
       then pure hedisEnv
       else Redis.connectHedisCluster hedisClusterCfg modifierFunc
   let internalEndPointHashMap = HM.fromList $ M.toList internalEndPointMap
-  let secondaryHedisClusterEnv = Nothing
+  let peerHedisClusterEnvs = []
   return $
     AppEnv
       { gwId = selfId,
