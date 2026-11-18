@@ -29,7 +29,7 @@ import EulerHS.Prelude
 import Kernel.Types.Beckn.Ack
 import Kernel.Utils.Servant.JSONBS
 import Servant hiding (Context)
-import Types.Beckn.API.Callback
+import Types.Beckn.API.Callback (CallbackReq)
 import Types.Beckn.Context
 
 newtype SearchReq = SearchReq
